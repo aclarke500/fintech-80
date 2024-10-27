@@ -9,17 +9,16 @@
 </template>
 
 <style>
-html, body, #app {
+html, body {
   height: 100%;
   margin: 0;
-}
-.router-link {
-  color: white;
-  text-decoration: none;
-  margin: 0 1/4rem 0 1/4rem;
+  background-color: #2c3e50; /* Ensures the background color extends */
 }
 
 #app {
+  min-height: 100vh; /* Ensures app container takes at least full viewport height */
+  display: flex;
+  flex-direction: column;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,8 +29,15 @@ html, body, #app {
   /* background-color: rgb(28, 43, 108); */
 }
 
+.router-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 0.25rem;
+}
+
 nav {
   padding: 30px;
+  background-color: #2c3e50; /* Adds background color to the navbar */
 }
 
 nav a {
