@@ -4,6 +4,7 @@
     <router-link class="router-link" to="/about">About</router-link> | 
     <router-link class="router-link" to="/create-profile">Create Profile</router-link> | 
     <router-link class="router-link" to="/propose-policy">Propose Policy</router-link>
+    <router-link class="router-link" to="/dashboard">Dashboard</router-link>
   </nav>
   <router-view/>
 </template>
