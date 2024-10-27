@@ -15,8 +15,16 @@
         <input type="text" placeholder="Gender" v-model="form.gender" required />
       </div>
       <div class="form-group">
-        <label>Vehicle model</label>
-        <textarea placeholder="Vehicle Model" v-model="form.vehiclemodel" required></textarea>
+        <label>Select Car Model</label>
+        <div class="carousel-container">
+          <button @click="prevItem" class="carousel-control">‹</button>
+          <div class="carousel-item">
+            <img :src="carModels[currentIndex].image" :alt="carModels[currentIndex].name" />
+            <p>{{ carModels[currentIndex].name }}</p>
+          </div>
+          <button @click="nextItem" class="carousel-control">›</button>
+        </div>
+        <input type="hidden" v-model="form.selectedCarModel" />
       </div>
       <div class="form-group">
         <label>Describe Previous Accidents</label>
@@ -66,14 +74,36 @@ export default {
         phone: '',
         message: '',
       },
+      carModels: [
+        { name: "Tesla Model S", image: "https://th.bing.com/th/id/R.76c882edad7141df823d9a41b8c7820e?rik=NAn9mL%2fpwz%2fLNw&pid=ImgRaw&r=0" },
+        { name: "Ford Mustang", image: "src\assets\bmwfront.png" },
+        { name: "Chevrolet Camaro", image: "src\assets\bmwfront.png" },
+        { name: "BMW i8", image: "src\assets\bmwfront.png" },
+        { name: "Audi R8", image: "src\assets\bmwfront.png" }
+      ], // Array of car objects with names and image URLs // List of items for the carousel
+      currentIndex: 0, // Track the current index in the carousel
     };
+  },
+  watch: {
+    currentIndex(newIndex) {
+      // Update the selected car model when the current index changes
+      this.form.selectedCarModel = this.carModels[newIndex];
+    }
   },
   methods: {
     handleSubmit() {
       console.log("Form submitted", this.form);
       // Add your form submission logic here
     },
-  },
+    prevItem() {
+      // Move to the previous item in the carousel
+      this.currentIndex = (this.currentIndex - 1 + this.carModels.length) % this.carModels.length;
+    },
+    nextItem() {
+      // Move to the next item in the carousel
+      this.currentIndex = (this.currentIndex + 1) % this.carModels.length;
+    }
+  }
 };
 </script>
 
@@ -163,5 +193,48 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   margin-right: 8px;
+}
+
+.contact-form {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.carousel-control {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #8a4af3;
+  padding: 0 1rem;
+}
+
+.carousel-item {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  min-width: 150px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.carousel-item img {
+  width: 100px; 
+  height: auto;
+  border-radius: 8px;
 }
 </style>
