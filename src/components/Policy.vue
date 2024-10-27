@@ -21,14 +21,31 @@
     <div class="policy-row">
       <h3>AI Model: {{ props.policy.aiModel }}</h3>
     </div>
-    <div class="photos-container">
-      <img src="../assets/plus.png" alt="Tesla Model Y" width="200" height="200">
-    </div>
+    <div class="photos-container">     
+ <font-awesome-icon icon="umbrella" class="egg" />
+</div>
+
   </div>
     <button @click="swipe('right')">></button>
 
   </div>
+  <div class="button-container">
+    <button>
+      <i class="fa-regular fa-file-lines"></i>
+    </button>
+    <button>
+      <i class="fa-light fa-x"></i>
+    </button>
+    <button>
+      <i class="fa-regular fa-heart"></i>
+    </button>
+    <button>
+      <i class="fa-sharp fa-light fa-ellipsis"></i>
+    </button>
+  </div>
     <div class="letter-container">
+      <!-- <font-awesome-icon :icon="['fass', 'file-lines']" /> -->
+      
       <p>{{ props.policy.policyText }}</p>
       <!-- Your content here -->
     </div>
@@ -37,6 +54,9 @@
 
 <script setup>
 import { reactive } from 'vue';
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// import { byPrefixAndName } from '@awesome.me/kit-KIT_CODE/icons'
 
 const state = reactive({
   src: '../assets/plus.png'
@@ -57,6 +77,38 @@ function swipe(direction) {
 
 <style scoped>
 
+.tinder-button {
+  color: black;
+  height: 100px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row; /* Change to row to align items horizontally */
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  background-color: white;
+}
+
+.button-container button {
+  background-color: #4CAF50;
+  border: black 1px solid;
+  color: black;
+  padding: 1/2rem;
+  margin: 1/2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: white;
+  width: 3rem;
+  height: 3rem;
+}
+
+
 .meta-data-container {
   display: flex;
   flex-direction: row; /* Change to row to align items horizontally */
@@ -70,7 +122,10 @@ function swipe(direction) {
   flex-direction: column;
   flex: 5;
 }
-
+.egg{
+  color: white;
+  height: 100px;
+}
 .meta-data-container button {
   flex: 1; /* Adjusts button to occupy space on either side */
   background-color: #4CAF50;
@@ -106,6 +161,11 @@ function swipe(direction) {
   justify-content: center;
   align-items: center;
   margin: 1rem;
+}
+
+.parent-container font-awesome-icon {
+  color: white;
+  height: 100px;
 }
 
 .policy-row h1,
