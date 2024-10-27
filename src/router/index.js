@@ -1,7 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import CreateProfileView from '@/views/CreateProfileView.vue';
+import ProposePolicyView from '@/views/ProposePolicyView.vue';
 
 const routes = [
+  {
+    path: '/propose-policy',
+    name: 'propose-policy',
+    component: ProposePolicyView
+  },
+  {
+    path: '/create-profile',
+    name: 'create-profile',
+    component: CreateProfileView
+  },
   {
     path: '/',
     name: 'home',
