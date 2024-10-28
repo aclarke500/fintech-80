@@ -99,11 +99,9 @@ export default {
 
       },
       carModels: [
-        { name: "Tesla Model S", image: "https://th.bing.com/th/id/R.76c882edad7141df823d9a41b8c7820e?rik=NAn9mL%2fpwz%2fLNw&pid=ImgRaw&r=0" },
-        { name: "Ford Mustang", image: "src\assets\bmwfront.png" },
-        { name: "Chevrolet Camaro", image: "src\assets\bmwfront.png" },
-        { name: "BMW i8", image: "src\assets\bmwfront.png" },
-        { name: "Audi R8", image: "src\assets\bmwfront.png" }
+        { name: "Tesla Model X", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdhGvli2zZ5vCPUit2o126wT1QgLDAmAAwIg&s" },
+        { name: "Wuling Hongguang Mini", image: "https://wattev2buy.com/wp-content/uploads/2020/04/saic-wuling-mini-ev-evgenius-clear-bg-200.png" },
+        { name: "BYD Dolphin", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy0_XCDqfygk6cg1NlPx0Wd569OesmIeCRMw&s" },
       ], // Array of car objects with names and image URLs // List of items for the carousel
       currentIndex: 0, // Track the current index in the carousel
     };
@@ -162,7 +160,7 @@ label {
 }
 
 .contact-form {
-  max-width: 400px;
+  min-width: 60%;
   margin: 30px 20px;
   padding: 30px;
   background-color: #eae0e0;
@@ -304,14 +302,15 @@ textarea:focus {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 25px;
-  min-width: 150px;
+ 
+  min-width: 80%;
   text-align: center;
   background-color: #fff;
 }
 
 .carousel-item img {
-  width: 100px; 
-  height: auto;
+  width: 200px; 
+  height: 200px;
   border-radius: 8px;
 }
 
