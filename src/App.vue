@@ -1,15 +1,55 @@
 <template>
   <nav>
-    <router-link class="router-link" to="/landing-page">Home</router-link> |
-    <router-link class="router-link" to="/about">About</router-link> | 
-    <router-link class="router-link" to="/create-profile">Create Profile</router-link> | 
-    <router-link class="router-link" to="/propose-policy">Propose Policy</router-link> | 
-    <router-link class="router-link" to="/dashboard">Dashboard</router-link>
+    <div class="nav-items">
+      <div class="logo-container">
+        <div class="logo nav-logo">♛</div>
+      </div>
+      <div class="links-container">
+        <router-link class="router-link" to="/landing-page">Home</router-link> |
+        <router-link class="router-link" to="/about">About</router-link> | 
+        <router-link class="router-link" to="/create-profile">Create Profile</router-link> | 
+        <router-link class="router-link" to="/propose-policy">Propose Policy</router-link> | 
+        <router-link class="router-link" to="/dashboard">Dashboard</router-link>
+      </div>
+      
+    </div>
   </nav>
   <router-view/>
 </template>
 
 <style>
+
+
+/* Navbar styling */
+.nav-items {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.nav-logo {
+  margin-right: 1rem;
+}
+
+/* Logo styling */
+.logo-container {
+  display: flex;
+  align-items: center;
+  
+}
+
+.logo {
+  background: linear-gradient(to bottom, #7357D9, #fc575e);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: white;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -29,6 +69,7 @@ html, body {
 
   /* background-color: rgb(28, 43, 108); */
 }
+
 
 .router-link {
   color: #5743D3;
@@ -50,5 +91,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #d3549e;
+}
+
+.nav-items {
+  display: flex;
 }
 </style>

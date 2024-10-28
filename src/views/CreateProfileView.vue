@@ -89,7 +89,7 @@ export default {
     return {
       accidentSections:[],
       form: {
-        fullName: 'Yaunzhue Chen',
+        fullName: 'Yuanzhu Chen',
         age: '38',
         gender: 'Male',
         selectedCarModel: 'Tesla Model Y',
@@ -162,7 +162,7 @@ export default {
 
 label {
   font-size: 1.3rem;
-  color: black; /* Matching color with the submit button */
+  color: #5743D3;; /* Matching color with the submit button */
   font-weight: bold;
   display: block;
   margin-bottom: 0.25rem;
@@ -206,8 +206,9 @@ label {
 }
 h2 {
   font-size: 1.8rem;
-  color: #333;
+  color: #d3549e;;
   margin-bottom: 1.8rem;
+  justify-content: center;
 }
 
 .form-group {
