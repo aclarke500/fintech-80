@@ -85,15 +85,19 @@ export default {
     return {
       accidentSections:[],
       form: {
-        fullName: '',
-        age: '',
-        gender: '',
-        selectedCarModel: '',
+        fullName: 'Yaunzhue Chen',
+        age: '38',
+        gender: 'Male',
+        selectedCarModel: 'Tesla Model Y',
+        numofpassengers: '4',
+        autoyear: '2021',
+        address: '123 Main St, San Francisco, CA',
+        relationship: 'Married',
         //add the select part
-        prevaccidents: '',
-        conditionsofaccidents: '',
-        crashcause: '',
-        driverless: '',
+        prevaccidents: 'T-boned on the highway while merging',
+        conditionsofaccidents: 'Car was written off, but no injuries found to not be at fault',
+        crashcause: 'Driver was texting and driving',
+        driverless: 'Yes',
         // Additional form fields...
     showAccidentDetails: false, // Variable to control the toggle
 
@@ -123,7 +127,9 @@ export default {
   methods: {
     handleSubmit() {
       console.log("Form submitted", this.form);
-      // Add your form submission logic here
+      // API CALL WILL GO HERE
+      this.$router.push({name:'propose-policy'}); // Ensure routing is working as intended
+
     },
     prevItem() {
       // Move to the previous item in the carousel
