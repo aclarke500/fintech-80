@@ -19,14 +19,19 @@
       </div>
 
       <!-- Create Profile Button -->
-      <button class="prf-create-btn">Create Profile</button>
+      <button class="prf-create-btn" @click="goToCreateProfile">Create Profile</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SmartBankingView'
+  name: 'SmartBankingView',
+  methods: {
+    goToCreateProfile() {
+      this.$router.push('/create-profile'); 
+    }
+  }
 };
 </script>
 
