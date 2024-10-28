@@ -1,42 +1,51 @@
 <template>
+  <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy"
+  :policyText="state.selectedPolicy.policyText" :index="state.indexOfSelectedPolicy"
+   @close="state.showPolicyModal = false"/>
+
   <Policy v-if="state.selectedPolicy" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
-  @swipe="(d)=>swipeCards(d)"/>
+  @swipe="(d)=>swipeCards(d)" @openModal="()=>openPolicyModal()" @remove="(idx)=>removePolicyOption(idx)"/>
 </template>
 <script setup>
 import { onMounted, reactive, computed } from 'vue';
+import { useRouter } from 'vue-router';
+// import { router } from '@/router';
 import Policy from '@/components/Policy.vue';
+import PolicyModal from '@/components/PolicyModal.vue';
+
+const router = useRouter();
 
 const state = reactive({
+  showPolicyModal: false,
   selectedPolicy: null,
   // auto update the index when selected policy changes
   indexOfSelectedPolicy: computed(() => state.policies.indexOf(state.selectedPolicy)), 
   policies: [
     {
+      policyName:'umbrella',
       name: 'John A MacDonald',
       carModel: 'Tesla Model Y',
       aiModel: 'Elon Musk FSD',
       policyText: "This is a sample policy text. It will look better soon. On a chilly autumn morning, Sarah was running late for work..."
     },
     {
+      policyName:'cheap',
       name: 'Jane Smith',
       carModel: 'Ford Mustang',
       aiModel: 'Ford Co-Pilot360',
       policyText: "This is another sample policy text. Jane loves her Mustang and uses the Co-Pilot360 to make her drives safer. One evening, a deer suddenly appeared on the road, and the AI-assisted braking saved her just in time."
     },
     {
+      policyName:'balance',
       name: 'Alice Johnson',
       carModel: 'BMW X5',
       aiModel: 'BMW Driving Assistant Professional',
       policyText: "Alice frequently commutes to the city. Her BMW's Driving Assistant helps her stay relaxed even in heavy traffic. On one particular rainy day, the assistant detected a potential collision and alerted her in advance, avoiding an accident."
-    },
-    {
-      name: 'Bob Williams',
-      carModel: 'Audi Q7',
-      aiModel: 'Audi Adaptive Cruise Control',
-      policyText: "Bob often takes road trips with his family. On a long stretch of highway, the Adaptive Cruise Control maintained a safe distance from vehicles, allowing Bob to enjoy the drive more comfortably and focus on the scenery."
     }
   ]
 });
+
+
 
 
 function swipeCards(direction) {
@@ -55,6 +64,29 @@ function swipeCards(direction) {
   }
 }
 
+function removePolicyOption(policyIndex) {
+  if (state.policies.length === 1){
+    router.push({name: 'create-profile'});
+    return;
+  }
+  // Remove the policy from the array
+  state.policies.splice(policyIndex, 1);
+
+  // Check if selectedPolicy is still in the array
+  if (!state.policies.includes(state.selectedPolicy)) {
+    if (state.policies.length > 0) {
+      // Set to the next available policy or the last one if none left at the index
+      state.selectedPolicy = state.policies[policyIndex % state.policies.length];
+    } else {
+      // Set to null if no policies are left
+      state.selectedPolicy = null;
+    }
+  }
+}
+
+function openPolicyModal(){
+  state.showPolicyModal = true;
+}
 
 
 onMounted(() => {

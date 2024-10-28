@@ -7,7 +7,7 @@
      <div class="meta-data">
     <div class="policy-row">
       <!-- +1 to account for 0 based indexing -->
-      <h1>Policy {{ props.index + 1 }}</h1>
+      <h1>The {{ props.policy.policyName }}</h1>
     </div>
 
     <div class="policy-row">
@@ -22,7 +22,12 @@
       <h3>AI Model: {{ props.policy.aiModel }}</h3>
     </div>
     <div class="photos-container">     
- <font-awesome-icon icon="umbrella" class="egg" />
+
+      <img v-if="props.policy.policyName == 'umbrella'" src="../assets/umbrella.png" alt="plus" @click="openPolicyModal" />
+      <img v-if="props.policy.policyName == 'cheap'" src="../assets/cheap.png" alt="plus" @click="openPolicyModal" />
+      <img v-if="props.policy.policyName == 'balance'" src="../assets/balance.png" alt="plus" @click="openPolicyModal" />
+
+
 </div>
 
   </div>
@@ -31,15 +36,15 @@
   </div>
 
   
-  <div class="button-container">
-    <button>
+  <div class="button-container sticky-bottom">
+    <button @click="openPolicyModal">
       <i class="fa-regular fa-file-lines"></i>
     </button>
-    <button>
+    <button @click="removePolicyOption">
       <i class="fa-light fa-x"></i>
     </button>
     <button>
-      <i class="fa-regular fa-heart"></i>
+      <i id="heart" class="fa-solid fa-heart"></i>
     </button>
     <button>
       <i class="fa-sharp fa-light fa-ellipsis"></i>
@@ -56,16 +61,13 @@
 
 <script setup>
 import { reactive } from 'vue';
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-// import { byPrefixAndName } from '@awesome.me/kit-KIT_CODE/icons'
 
 const state = reactive({
   src: '../assets/plus.png'
 });
 
 const props = defineProps(['policy', 'index']);
-const emits = defineEmits(['swipe']);
+const emits = defineEmits(['swipe', 'openModal']);
 
 
 function swipe(direction) {
@@ -75,9 +77,40 @@ function swipe(direction) {
     emits('swipe', 'right');
   }
 }
+
+function openPolicyModal(){
+  emits('openModal');
+}
+
+function removePolicyOption(){
+  emits('remove', props.index);
+}
+
+
 </script>
 
 <style scoped>
+
+#heart{
+  color: red;
+  /* background-color: red; */
+}
+
+
+img{
+  width: 150%;
+  max-width: 500px;
+  max-height: 200px;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  /* height: 30%; */
+}
+
+#policy-icon{
+  color: white;
+  height: 100px;
+}
 
 .tinder-button {
   color: black;
@@ -86,30 +119,42 @@ function swipe(direction) {
 
 .button-container {
   display: flex;
-  flex-direction: row; /* Change to row to align items horizontally */
-  justify-content: center;
+  justify-content: space-evenly; /* Evenly distributes buttons across the container */
   align-items: center;
-  margin: 1rem;
-  background-color: white;
+  background-color: rgb(27 42 59);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 100%;
+  height: 10%; /* Adjusts to content size */
+  border-top: 3px solid black;
 }
 
 .button-container button {
-  background-color: #4CAF50;
+  flex: 1; /* Allows each button to grow equally */
+  max-width: 3rem; /* Sets max width for square shape */
+  aspect-ratio: 1 / 1; /* Keeps buttons square */
+  background-color: white;
   border: black 1px solid;
   color: black;
-  padding: 1/2rem;
-  margin: 1/2rem;
+  font-size: 1.5rem;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  padding: 0;
   cursor: pointer;
-  background-color: white;
-  width: 3rem;
-  height: 3rem;
 }
 
+.button-container button:hover {
+  background-color: #e0e0e0; /* Slightly darker background */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow */
+}
+
+
+.sticky-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* Optional: make it full width */
+  padding: 1rem; /* Optional: padding for space */
+  text-align: center; /* Optional: center-align content */
+}
 
 .meta-data-container {
   display: flex;
@@ -129,7 +174,7 @@ function swipe(direction) {
   height: 100px;
 }
 .meta-data-container button {
-  flex: 1; /* Adjusts button to occupy space on either side */
+  flex: 1/4; /* Adjusts button to occupy space on either side */
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -141,6 +186,7 @@ function swipe(direction) {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
+;
 }
 
 /* .meta-data-container button{
@@ -155,6 +201,8 @@ function swipe(direction) {
 
 .policy-row {
   color: white;
+  word-wrap: break-word;
+  max-width: 80%;
 }
 
 .photos-container {
