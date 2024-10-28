@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CreateProfileView from '@/views/CreateProfileView.vue';
 import ProposePolicyView from '@/views/ProposePolicyView.vue';
 import LandingPageView from '@/views/LandingPageView.vue';
+import DashboardView from '@/views/DashboardView.vue';
 
 
 
@@ -13,6 +14,11 @@ const routes = [
     path:'/landing-page',
     name:'landing-page',
     component: LandingPageView,
+  },
+  {
+    path:'/dashboard',
+    name:'dashboard',
+    component: DashboardView,
   },
   {
     path: '/propose-policy',
