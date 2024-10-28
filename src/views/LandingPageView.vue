@@ -85,7 +85,7 @@ export default {
 
 /* Title and subtitle */
 .title {
-  font-family: Helvetica;
+  font-family: Helvetica, Arial, sans-serif;
   
   padding-bottom: 4rem;
   color: white;
@@ -127,6 +127,7 @@ export default {
 
 /* create profile button styling */
 .prf-create-btn {
+  font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(to right, #7357D9, #fc575e);
   border: none;
   border-radius: 25px;
