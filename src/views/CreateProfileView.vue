@@ -25,7 +25,11 @@
         </div>
 
         <!-- Car model name below the carousel -->
-        <p class="carousel-text">{{ carModels[currentIndex].name }}</p>
+        <select v-model="currentIndex" @change="updateSelectedCarModel" class="car-select">
+          <option v-for="(car, index) in carModels" :value="index" :key="car.name">
+            {{ car.name }}
+          </option>
+        </select>
 
         <input type="hidden" v-model="form.selectedCarModel" />
       </div>
@@ -149,8 +153,9 @@ export default {
 </script>
 
 <style scoped>
+
 label {
-  font-size: 0.85rem;
+  font-size: 1.3rem;
   color: black; /* Matching color with the submit button */
   font-weight: bold;
   display: block;
@@ -194,7 +199,7 @@ label {
   background-color: #6e38c1;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #333;
   margin-bottom: 1.8rem;
 }
@@ -278,6 +283,7 @@ textarea:focus {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: left;
+  max-width: 70%;
 }
 
 .carousel-container {
@@ -302,7 +308,6 @@ textarea:focus {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 25px;
- 
   min-width: 80%;
   text-align: center;
   background-color: #fff;
@@ -320,5 +325,16 @@ textarea:focus {
   font-size: 1rem;
   font-weight: bold;
   color: #333;
+}
+
+.car-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  appearance: none; /* Removes default dropdown arrow for custom styling */
 }
 </style>
