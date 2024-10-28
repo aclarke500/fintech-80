@@ -18,8 +18,8 @@
         <span class="dot"></span>
       </div>
 
-      <!-- Login button -->
-      <button class="login-btn">Log in</button>
+      <!-- Create Profile Button -->
+      <button class="prf-create-btn">Create Profile</button>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 100vh;
-  color: white;
+  color: #5743D3;
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
@@ -85,16 +85,18 @@ export default {
 
 /* Title and subtitle */
 .title {
-  padding-bottom: 7rem;
+  font-family: Helvetica;
+  
+  padding-bottom: 4rem;
   color: white;
   font-size: 3.8rem;
-  font-weight: bold;
+  font-weight: 750;
   margin: 20px 0 10px;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin-bottom: 1.2rem;
 }
 
 /* Description text */
@@ -123,21 +125,21 @@ export default {
   background-color: white;
 }
 
-/* Login button styling */
-.login-btn {
+/* create profile button styling */
+.prf-create-btn {
   background: linear-gradient(to right, #7357D9, #fc575e);
   border: none;
   border-radius: 25px;
   color: white;
   font-size: 1rem;
   font-weight: bold;
-  padding: 12px 40px;
+  padding: 1rem 3rem;
   cursor: pointer;
   margin-top: 20px;
   transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
+.prf-create-btn:hover {
   background: linear-gradient(to right, #fc575e, #f7b42c);
 }
 </style>

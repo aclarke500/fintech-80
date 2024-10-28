@@ -20,7 +20,7 @@ html, body {
   min-height: 100vh; /* Ensures app container takes at least full viewport height */
   display: flex;
   flex-direction: column;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -31,22 +31,24 @@ html, body {
 }
 
 .router-link {
-  color: white;
+  color: #5743D3;
   text-decoration: none;
   margin: 0 0.25rem;
 }
 
 nav {
   padding: 30px;
-  background-color: black; /* Adds background color to the navbar */
+  background-color: white; /* Adds background color to the navbar */
+  
 }
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #5743D3;
+
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #d3549e;
 }
 </style>
