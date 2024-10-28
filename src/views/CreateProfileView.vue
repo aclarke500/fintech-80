@@ -10,22 +10,26 @@
         <label>Age</label>
         <input type="number" placeholder="Age" v-model="form.age" required />
       </div>
-      <div class="form-group">
-        <label>Gender</label>
-        <input type="text" placeholder="Gender" v-model="form.gender" required />
-      </div>
+      <!-- Carousel Field -->
       <div class="form-group">
         <label>Select Car Model</label>
         <div class="carousel-container">
           <button @click="prevItem" class="carousel-control">‹</button>
+          
+          <!-- Display the current car model image -->
           <div class="carousel-item">
             <img :src="carModels[currentIndex].image" :alt="carModels[currentIndex].name" />
-            <p>{{ carModels[currentIndex].name }}</p>
           </div>
+          
           <button @click="nextItem" class="carousel-control">›</button>
         </div>
+
+        <!-- Car model name below the carousel -->
+        <p class="carousel-text">{{ carModels[currentIndex].name }}</p>
+
         <input type="hidden" v-model="form.selectedCarModel" />
       </div>
+
       <div class="form-group">
         <label>Number of Passengers</label>
         <input type="number" placeholder="Number of Passengers" v-model="form.numofpassengers" required />
@@ -68,7 +72,6 @@
           </div>
         </div>
         
-        <button type="button" @click="addAccidentSection" class="add-button">+ Add Another Accident</button>
       </div>
       <button type="submit" class="submit-button">Send</button>
     </form>
@@ -310,5 +313,13 @@ textarea:focus {
   width: 100px; 
   height: auto;
   border-radius: 8px;
+}
+
+.carousel-text {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
 }
 </style>
