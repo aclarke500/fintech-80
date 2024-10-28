@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import DashboardSearchUser from '@/components/DashboardSearchUser.vue';
 import DashboardGraph from '@/components/DashboardGraph.vue';
 
@@ -22,6 +22,28 @@ function clickedPill(client) {
   state.user = client;
   console.log(client);
 }
+
+
+async function fetchData() {
+  try {
+    const url = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/aggressive';
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+onMounted(async () => {
+  await fetchData();
+});
+
 
 </script>
 
