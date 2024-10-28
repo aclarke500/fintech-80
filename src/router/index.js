@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import CreateProfileView from '@/views/CreateProfileView.vue';
 import ProposePolicyView from '@/views/ProposePolicyView.vue';
 
+
+ // this is a comment
 const routes = [
   {
     path: '/propose-policy',
