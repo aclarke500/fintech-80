@@ -264,7 +264,7 @@ textarea:focus {
 }
 
 .submit-button:hover {
-  background-color: black;
+  background-color: #5743D3;
 }
 
 .submit-button::before {
