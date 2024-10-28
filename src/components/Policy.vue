@@ -2,7 +2,7 @@
   <div class="parent-container">
 
     <div class="meta-data-container">
-      <button @click="swipe('left')"><</button>
+      <button class="swipe"@click="swipe('left')"><</button>
     <!-- display of the policy high level data -->
      <div class="meta-data">
     <div class="policy-row">
@@ -26,9 +26,11 @@
 </div>
 
   </div>
-    <button @click="swipe('right')">></button>
+    <button class="swipe"@click="swipe('right')">></button>
 
   </div>
+
+  
   <div class="button-container">
     <button>
       <i class="fa-regular fa-file-lines"></i>
@@ -43,7 +45,7 @@
       <i class="fa-sharp fa-light fa-ellipsis"></i>
     </button>
   </div>
-    <div class="letter-container">
+    <div v-if="0" class="letter-container">
       <!-- <font-awesome-icon :icon="['fass', 'file-lines']" /> -->
       
       <p>{{ props.policy.policyText }}</p>
