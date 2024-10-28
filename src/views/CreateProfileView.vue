@@ -335,6 +335,5 @@ textarea:focus {
   border: 1px solid #ddd;
   box-sizing: border-box;
   margin-top: 0.5rem;
-  appearance: none; /* Removes default dropdown arrow for custom styling */
 }
 </style>
