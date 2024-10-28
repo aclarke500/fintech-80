@@ -23,8 +23,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  background: rgb(28, 43, 108) url('https://th.bing.com/th/id/R.ef9e86e9dccc6897b7cb42cdb1d432cb?rik=Lk5mNetJWhJOWA&pid=ImgRaw&r=0');
+  color: #f6f6ee;
+  /* background: url('https://th.bing.com/th/id/R.ef9e86e9dccc6897b7cb42cdb1d432cb?rik=Lk5mNetJWhJOWA&pid=ImgRaw&r=0'); */
 
   /* background-color: rgb(28, 43, 108); */
 }

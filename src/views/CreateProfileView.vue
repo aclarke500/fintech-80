@@ -27,36 +27,48 @@
         <input type="hidden" v-model="form.selectedCarModel" />
       </div>
       <div class="form-group">
-        <label>Describe Previous Accidents</label>
-        <textarea placeholder="Describe Previous Accidents" v-model="form.prevaccidents" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Conditions of Accidents</label>
-        <textarea placeholder="Conditions of Accidents" v-model="form.conditionsofaccidents" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Crash Cause</label>
-        <textarea placeholder="Crash Cause" v-model="form.crashcause" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Driverless?</label>
-        <textarea placeholder="Driverless?" v-model="form.driverless" required></textarea>
-      </div>
-      <div class="form-group">
         <label>Number of Passengers</label>
-        <textarea placeholder="Number of Passengers" v-model="form.numofpassengers" required></textarea>
+        <input type="number" placeholder="Number of Passengers" v-model="form.numofpassengers" required />
       </div>
       <div class="form-group">
         <label>Auto Year</label>
-        <textarea placeholder="Auto year" v-model="form.autoyear" required></textarea>
+        <input type="text" placeholder="Auto Year" v-model="form.autoyear" required />
       </div>
       <div class="form-group">
         <label>Address</label>
-        <textarea placeholder="Address" v-model="form.address" required></textarea>
+        <input type="text" placeholder="Address" v-model="form.address" required />
       </div>
       <div class="form-group">
         <label>Relationship Status</label>
         <textarea placeholder="Relationship Status" v-model="form.relationship" required></textarea>
+      </div>      
+      <div class="form-group">
+        <label @click="toggleAccidentDetails">
+          Describe Previous Accidents
+          <span class="toggle-icon">{{ showAccidentDetails ? '-' : '+' }}</span>
+        </label>
+        <textarea 
+          placeholder="Describe Previous Accidents" 
+          v-model="form.prevaccidents" 
+          required>
+        </textarea>
+        
+        <div v-if="showAccidentDetails" class="accident-details">
+          <div class="form-group">
+            <label>Conditions of Accidents</label>
+            <textarea placeholder="Conditions of Accidents" v-model="form.conditionsofaccidents" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Crash Cause</label>
+            <textarea placeholder="Crash Cause" v-model="form.crashcause" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Driverless?</label>
+            <textarea placeholder="Driverless?" v-model="form.driverless" required></textarea>
+          </div>
+        </div>
+        
+        <button type="button" @click="addAccidentSection" class="add-button">+ Add Another Accident</button>
       </div>
       <button type="submit" class="submit-button">Send</button>
     </form>
@@ -68,11 +80,20 @@
 export default {
   data() {
     return {
+      accidentSections:[],
       form: {
         fullName: '',
-        email: '',
-        phone: '',
-        message: '',
+        age: '',
+        gender: '',
+        selectedCarModel: '',
+        //add the select part
+        prevaccidents: '',
+        conditionsofaccidents: '',
+        crashcause: '',
+        driverless: '',
+        // Additional form fields...
+    showAccidentDetails: false, // Variable to control the toggle
+
       },
       carModels: [
         { name: "Tesla Model S", image: "https://th.bing.com/th/id/R.76c882edad7141df823d9a41b8c7820e?rik=NAn9mL%2fpwz%2fLNw&pid=ImgRaw&r=0" },
@@ -83,6 +104,12 @@ export default {
       ], // Array of car objects with names and image URLs // List of items for the carousel
       currentIndex: 0, // Track the current index in the carousel
     };
+  },
+  computed:{
+    showAccidentDetails(){
+      // !! casts to boolean, we want to know if there is there
+      return !!this.form.prevaccidents.length;
+    }
   },
   watch: {
     currentIndex(newIndex) {
@@ -99,12 +126,25 @@ export default {
       // Move to the previous item in the carousel
       this.currentIndex = (this.currentIndex - 1 + this.carModels.length) % this.carModels.length;
     },
+    toggleAccidentDetails() {
+      this.showAccidentDetails = !this.showAccidentDetails;
+    },
+    addAccidentSection() {
+      this.accidentSections.push({
+        prevaccidents: '',
+        conditionsofaccidents: '',
+        crashcause: '',
+        driverless: ''
+      });
+    },
+    // add toggleaccident section
     nextItem() {
       // Move to the next item in the carousel
       this.currentIndex = (this.currentIndex + 1) % this.carModels.length;
     }
   }
 };
+
 </script>
 
 <style scoped>
@@ -117,16 +157,41 @@ label {
   letter-spacing: 0.05em;
   padding-left: 10px;
 }
+
 .contact-form {
   max-width: 400px;
   margin: 30px 20px;
   padding: 30px;
-  background-color: #f5f5f5;
+  background-color: #eae0e0;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
   text-align: center;
 }
 
+.toggle-icon {
+  cursor: pointer;
+  margin-left: 5px;
+  font-weight: bold;
+  color: #031bee;
+}
+
+.accident-details {
+  margin-top: 1rem;
+}
+
+.add-button {
+  background-color: #8a4af3;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 1rem;
+  border: none;
+}
+
+.add-button:hover {
+  background-color: #6e38c1;
+}
 h2 {
   font-size: 1.5rem;
   color: #333;
@@ -153,9 +218,18 @@ textarea {
 }
 
 textarea {
-  resize: none;
+  resize: vertical; /* Allows the user to adjust the height of the textarea */
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
   height: 100px;
 }
+
 
 input::placeholder,
 textarea::placeholder {
