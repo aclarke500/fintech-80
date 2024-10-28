@@ -13,7 +13,7 @@
 html, body {
   height: 100%;
   margin: 0;
-  background-color: #2c3e50; /* Ensures the background color extends */
+  background-color: #5743D3; /* Ensures the background color extends */
 }
 
 #app {
@@ -38,7 +38,7 @@ html, body {
 
 nav {
   padding: 30px;
-  background-color: #2c3e50; /* Adds background color to the navbar */
+  background-color: black; /* Adds background color to the navbar */
 }
 
 nav a {

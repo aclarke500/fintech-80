@@ -25,7 +25,11 @@
         </div>
 
         <!-- Car model name below the carousel -->
-        <p class="carousel-text">{{ carModels[currentIndex].name }}</p>
+        <select v-model="currentIndex" @change="updateSelectedCarModel" class="car-select">
+          <option v-for="(car, index) in carModels" :value="index" :key="car.name">
+            {{ car.name }}
+          </option>
+        </select>
 
         <input type="hidden" v-model="form.selectedCarModel" />
       </div>
@@ -103,11 +107,9 @@ export default {
 
       },
       carModels: [
-        { name: "Tesla Model S", image: "https://th.bing.com/th/id/R.76c882edad7141df823d9a41b8c7820e?rik=NAn9mL%2fpwz%2fLNw&pid=ImgRaw&r=0" },
-        { name: "Ford Mustang", image: "src\assets\bmwfront.png" },
-        { name: "Chevrolet Camaro", image: "src\assets\bmwfront.png" },
-        { name: "BMW i8", image: "src\assets\bmwfront.png" },
-        { name: "Audi R8", image: "src\assets\bmwfront.png" }
+        { name: "Tesla Model X", image: "https://i.ibb.co/VtZHmS5/teslax-Small.jpg" },
+        { name: "Wuling Hongguang Mini", image: "https://i.ibb.co/vVKsdbb/wuling-Small.png" },
+        { name: "BYD Dolphin", image: "https://i.ibb.co/pPXHdfX/bydSmall.jpg" },
       ], // Array of car objects with names and image URLs // List of items for the carousel
       currentIndex: 0, // Track the current index in the carousel
     };
@@ -157,8 +159,9 @@ export default {
 </script>
 
 <style scoped>
+
 label {
-  font-size: 0.85rem;
+  font-size: 1.3rem;
   color: black; /* Matching color with the submit button */
   font-weight: bold;
   display: block;
@@ -168,7 +171,7 @@ label {
 }
 
 .contact-form {
-  max-width: 400px;
+  min-width: 60%;
   margin: 30px 20px;
   padding: 30px;
   background-color: #eae0e0;
@@ -202,7 +205,7 @@ label {
   background-color: #6e38c1;
 }
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #333;
   margin-bottom: 1.8rem;
 }
@@ -254,7 +257,7 @@ textarea:focus {
   width: 100%;
   padding: 0.75rem;
   border-radius: 25px;
-  background-color: rgb(28, 43, 108);
+  background-color: #7357D9;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -267,7 +270,7 @@ textarea:focus {
 }
 
 .submit-button:hover {
-  background-color: rgb(28, 43, 108);
+  background-color: #5743D3;
 }
 
 .submit-button::before {
@@ -284,8 +287,9 @@ textarea:focus {
   padding: 40px;
   background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
+  max-width: 70%;
 }
 
 .carousel-container {
@@ -310,14 +314,14 @@ textarea:focus {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 25px;
-  min-width: 150px;
+  min-width: 80%;
   text-align: center;
   background-color: #fff;
 }
 
 .carousel-item img {
-  width: 100px; 
-  height: auto;
+  width: 200px; 
+  height: 200px;
   border-radius: 8px;
 }
 
@@ -327,5 +331,15 @@ textarea:focus {
   font-size: 1rem;
   font-weight: bold;
   color: #333;
+}
+
+.car-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
 }
 </style>
