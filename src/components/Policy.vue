@@ -232,7 +232,6 @@ img {
   margin: 1rem;
   height: 30%;
   max-height: 30%;
-
 }
 
 .parent-container font-awesome-icon {
