@@ -1,3 +1,142 @@
 <template>
-  
+  <div class="banking-page">
+    <!-- Logo and title -->
+    <div class="content">
+      <div class="logo-container">
+        <div class="logo">♛</div>
+      </div>
+      <h1 class="title">Smart Banking</h1>
+      <h2 class="subtitle">Welcome back</h2>
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+
+      <!-- Pagination dots -->
+      <div class="pagination-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Login button -->
+      <button class="login-btn">Log in</button>
+    </div>
+  </div>
 </template>
+
+<script>
+export default {
+  name: 'SmartBankingView'
+};
+</script>
+
+<style scoped>
+/* Gradient background for the main container */
+.banking-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background: linear-gradient(to bottom, #6a11cb, #2575fc);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Top bar styling */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.9rem;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Logo styling */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.logo {
+  background: linear-gradient(to bottom, #f7b42c, #fc575e);
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* Title and subtitle */
+.title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Description text */
+.description {
+  font-size: 0.9rem;
+  padding: 0 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Pagination dots */
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+}
+
+.dot.active {
+  background-color: white;
+}
+
+/* Login button styling */
+.login-btn {
+  background: linear-gradient(to right, #f7b42c, #fc575e);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 12px 40px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background: linear-gradient(to right, #fc575e, #f7b42c);
+}
+</style>
