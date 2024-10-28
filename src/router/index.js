@@ -4,6 +4,9 @@ import CreateProfileView from '@/views/CreateProfileView.vue';
 import ProposePolicyView from '@/views/ProposePolicyView.vue';
 import LandingPageView from '@/views/LandingPageView.vue';
 
+
+
+// comments man
 const routes = [
   {
     path:'/landing-page',
