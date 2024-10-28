@@ -8,7 +8,7 @@
       <h1 class="title">Policy Royale</h1>
       <h2 class="subtitle">Welcome back</h2>
       <p class="description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Your all in one policy creation and managment solution.
       </p>
 
       <!-- Pagination dots -->
@@ -106,7 +106,7 @@ export default {
 
 /* Description text */
 .description {
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   padding: 0 20px;
   color: rgba(255, 255, 255, 0.8);
 }
