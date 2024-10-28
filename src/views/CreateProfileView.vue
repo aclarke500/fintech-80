@@ -103,9 +103,9 @@ export default {
 
       },
       carModels: [
-        { name: "Tesla Model X", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdhGvli2zZ5vCPUit2o126wT1QgLDAmAAwIg&s" },
-        { name: "Wuling Hongguang Mini", image: "https://wattev2buy.com/wp-content/uploads/2020/04/saic-wuling-mini-ev-evgenius-clear-bg-200.png" },
-        { name: "BYD Dolphin", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy0_XCDqfygk6cg1NlPx0Wd569OesmIeCRMw&s" },
+        { name: "Tesla Model X", image: "https://i.ibb.co/VtZHmS5/teslax-Small.jpg" },
+        { name: "Wuling Hongguang Mini", image: "https://i.ibb.co/vVKsdbb/wuling-Small.png" },
+        { name: "BYD Dolphin", image: "https://i.ibb.co/pPXHdfX/bydSmall.jpg" },
       ], // Array of car objects with names and image URLs // List of items for the carousel
       currentIndex: 0, // Track the current index in the carousel
     };
