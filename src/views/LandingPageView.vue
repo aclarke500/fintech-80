@@ -5,7 +5,7 @@
       <div class="logo-container">
         <div class="logo">♛</div>
       </div>
-      <h1 class="title">Smart Banking</h1>
+      <h1 class="title">Policy Royale</h1>
       <h2 class="subtitle">Welcome back</h2>
       <p class="description">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -38,7 +38,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 100vh;
-  background: linear-gradient(to bottom, #6a11cb, #2575fc);
   color: white;
   text-align: center;
   padding: 20px;
@@ -72,21 +71,23 @@ export default {
 }
 
 .logo {
-  background: linear-gradient(to bottom, #f7b42c, #fc575e);
-  width: 80px;
-  height: 80px;
+  background: linear-gradient(to bottom, #7357D9, #fc575e);
+  width: 7rem;
+  height: 7rem;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 4.5rem;
   font-weight: bold;
   color: white;
 }
 
 /* Title and subtitle */
 .title {
-  font-size: 2.2rem;
+  padding-bottom: 7rem;
+  color: white;
+  font-size: 3.8rem;
   font-weight: bold;
   margin: 20px 0 10px;
 }
@@ -124,7 +125,7 @@ export default {
 
 /* Login button styling */
 .login-btn {
-  background: linear-gradient(to right, #f7b42c, #fc575e);
+  background: linear-gradient(to right, #7357D9, #fc575e);
   border: none;
   border-radius: 25px;
   color: white;

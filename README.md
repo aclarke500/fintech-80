@@ -27,3 +27,4 @@ White: #F2F2F3
 Light Purple: #A378FC
 Grey: #727071
 Royal Purple: #5743D3
+Red: #fc575e
