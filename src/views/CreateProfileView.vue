@@ -84,6 +84,8 @@
 
 <!-- TODO modify this for all fields -->
 <script>
+import store from '@/store';
+
 export default {
   data() {
     return {
@@ -130,6 +132,7 @@ export default {
     handleSubmit() {
       console.log("Form submitted", this.form);
       // API CALL WILL GO HERE
+      store.formClient = this.form;
       this.$router.push({name:'propose-policy'}); // Ensure routing is working as intended
 
     },
