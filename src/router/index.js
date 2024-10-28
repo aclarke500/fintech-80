@@ -7,6 +7,7 @@ import LandingPageView from '@/views/LandingPageView.vue';
 
 
 // comments man
+ // this is a comment
 const routes = [
   {
     path:'/landing-page',
