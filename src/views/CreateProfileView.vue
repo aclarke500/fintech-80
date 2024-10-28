@@ -251,7 +251,7 @@ textarea:focus {
   width: 100%;
   padding: 0.75rem;
   border-radius: 25px;
-  background-color: rgb(28, 43, 108);
+  background-color: #7357D9;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -264,7 +264,7 @@ textarea:focus {
 }
 
 .submit-button:hover {
-  background-color: rgb(28, 43, 108);
+  background-color: black;
 }
 
 .submit-button::before {
@@ -281,7 +281,7 @@ textarea:focus {
   padding: 40px;
   background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
   text-align: left;
   max-width: 70%;
 }
