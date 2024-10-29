@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <DashboardSearchUser v-if="!state.user" id="search" @clicked-pill="(c) => clickedPill(c)" />
+  <div class="container" v-if="!state.user">
+    <DashboardSearchUser  id="search" @clicked-pill="(c) => clickedPill(c)" />
   </div>
 
 
