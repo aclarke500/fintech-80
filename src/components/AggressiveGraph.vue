@@ -111,7 +111,7 @@ export default {
             label: 'Balanced',          // First line label
             data: this.speedData.balanced,    // First line data
             borderColor: '#5743D3',           // Color of the first line
-            backgroundColor: 'rgba(87, 67, 211, 0.2)', 
+            backgroundColor: '#5743D3', 
             borderWidth: 2,
             pointBackgroundColor: '#5743D3',
             pointBorderColor: '#5743D3',
@@ -120,22 +120,22 @@ export default {
           {
             label: 'Economic Data',           // Second line label
             data: this.speedData.economic,    // Second line data
-            borderColor: '#43D38D',           // Color of the second line
-            backgroundColor: 'rgba(67, 211, 141, 0.2)', 
+            borderColor: '#d3549e',           // Color of the second line
+            backgroundColor: '#d3549e', 
             borderWidth: 2,
-            pointBackgroundColor: '#43D38D',
-            pointBorderColor: '#43D38D',
+            pointBackgroundColor: '#d3549e',
+            pointBorderColor: '#d3549e',
             tension: 0.4,
           }
           ,
           {
             label: 'Total Coverage',          // Third line label
             data: this.speedData.total, // Third line data
-            borderColor: '#D34343',           // Color of the third line
-            backgroundColor: 'rgba(211, 67, 67, 0.2)', 
+            borderColor: '#A378FC',           // Color of the third line
+            backgroundColor: '#A378FC', 
             borderWidth: 2,
-            pointBackgroundColor: '#D34343',
-            pointBorderColor: '#D34343',
+            pointBackgroundColor: '#A378FC',
+            pointBorderColor: '#A378FC',
             tension: 0.4,
           }
         ],
@@ -167,7 +167,7 @@ export default {
             label: 'Balanced',          // First line label
             data: this.a.balanced,    // First line data
             borderColor: '#5743D3',           // Color of the first line
-            backgroundColor: 'rgba(87, 67, 211, 0.2)', 
+            backgroundColor: '#5743D3', 
             borderWidth: 2,
             pointBackgroundColor: '#5743D3',
             pointBorderColor: '#5743D3',
@@ -176,22 +176,22 @@ export default {
           {
             label: 'Economic Data',           // Second line label
             data: this.a.economic,    // Second line data
-            borderColor: '#43D38D',           // Color of the second line
-            backgroundColor: 'rgba(67, 211, 141, 0.2)', 
+            borderColor: '#d3549e',           // Color of the second line
+            backgroundColor: '#d3549e', 
             borderWidth: 2,
-            pointBackgroundColor: '#43D38D',
-            pointBorderColor: '#43D38D',
+            pointBackgroundColor: '#d3549e',
+            pointBorderColor: '#d3549e',
             tension: 0.4,
           }
           ,
           {
             label: 'Total Coverage',          // Third line label
             data: this.a.totalCoverage, // Third line data
-            borderColor: '#D34343',           // Color of the third line
-            backgroundColor: 'rgba(211, 67, 67, 0.2)', 
+            borderColor: '#A378FC',           // Color of the third line
+            backgroundColor: '#A378FC', 
             borderWidth: 2,
-            pointBackgroundColor: '#D34343',
-            pointBorderColor: '#D34343',
+            pointBackgroundColor: '#A378FC',
+            pointBorderColor: '#A378FC',
             tension: 0.4,
           }
         ],
@@ -232,25 +232,19 @@ export default {
       // INDICATOR STUFF
       indicators: [
         {
-          value: 30,
+          value: Math.floor(Math.random() * 70) + 1,
           title: 'Autonomy Score',
           description: 'Measure of how often driver initiates autonomy',
-          source: 'Bayhealth General',
-          leader: 'Led by Kevin McDiarmid and Bayhealth General Hospital',
         },
         {
-          value: 50,
+          value: Math.floor(Math.random() * 98) + 1,
           title: 'Efficiency Score',
           description: 'Shows driver efficiency in various conditions',
-          source: 'National Driving Safety',
-          leader: 'Led by Dr. Amanda Greyson',
         },
         {
-          value: 70,
+          value: Math.floor(Math.random() * 98) + 1,
           title: 'Risk Assessment',
           description: 'Risk level based on recent driving data',
-          source: 'SafeDrive Analytics',
-          leader: 'Managed by Dr. Samuel Ortega',
         },
       ],
 
