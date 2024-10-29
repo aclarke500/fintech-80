@@ -61,9 +61,11 @@
 
 <script setup>
 import { reactive, watch } from 'vue';
-
+import store from '@/store';
 const props = defineProps(['policy', 'index']);
 const emits = defineEmits(['swipe', 'openModal']);
+
+console.log(store)
 
 const state = reactive({
   m:props.policy.metadata,
