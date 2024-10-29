@@ -77,6 +77,10 @@ ChartJS.register(
 
 export default {
   name: 'LineAndDoughnutChart',
+  props:{
+    speedData: Object,
+    aggressivenessData: Object,
+  },
   components: { Line, Doughnut },
   data() {
     return {

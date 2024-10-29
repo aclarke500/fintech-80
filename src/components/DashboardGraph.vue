@@ -1,11 +1,9 @@
 <template>
 
-<AggressiveGraph/>
+<AggressiveGraph  v-if="1"/>
 
 <div class="meta-data">
   {{ props.client.name }}
-  {{ state.speedData }}
-  {{ state.aggressivenessData }}
 </div>
 
 </template>
@@ -22,10 +20,8 @@ const state = reactive({
 });
 
 
-const props = defineProps(['client', 'speed', 'aggressive']);
-console.log(props.client);
-console.log(props.speed);
-console.log(props.data);
+const props = defineProps(['client']);
+
 
 async function getData(urlSuffix) {
   let retValue = null;
@@ -47,10 +43,8 @@ async function getData(urlSuffix) {
 
 
 onMounted(async () => {
-  debugger
-  alert('egg')
+
   const s = state;
-  // state.aggressivenessData = await getData('aggressive');
   debugger
   state.speedData = await getData('speed');
   const speedUrl = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/speed'
@@ -61,7 +55,7 @@ onMounted(async () => {
     console.log(data)
   }) // Handle the data from the response
   .catch(error => console.error('Error:', error)); // Handle any errors
-  const x = 5;
+
 });
 </script>
 <style>
