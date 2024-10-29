@@ -8,7 +8,7 @@
         <router-link class="router-link" to="/landing-page">Home</router-link> |
         <router-link class="router-link" to="/about">About</router-link> | 
         <router-link class="router-link" to="/create-profile">Create Profile</router-link> | 
-        <router-link class="router-link" to="/propose-policy">Propose Policy</router-link> | 
+        <router-link class="router-link" to="/propose-policy" @click="clear">Propose Policy</router-link> | 
         <router-link class="router-link" to="/dashboard">Dashboard</router-link>
       </div>
       
@@ -16,7 +16,12 @@
   </nav>
   <router-view/>
 </template>
-
+<script setup>
+import store from './store';
+function clear() {
+  store.formClient = null;
+}
+</script>
 <style>
 
 

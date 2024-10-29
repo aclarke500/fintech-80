@@ -1,3 +1,5 @@
+import { Title } from "chart.js";
+
 /**
  * 
  * @param {Object} response response from the RAG backend
@@ -11,6 +13,27 @@ export function cleanAggressive(object) {
     ratios: object.ratios,
   }
 }
+export function cleanPolicies(arr){
+  let policies = [];
+  for (let i = 0; i < arr.length; i++) {
+    let policy = arr[i];
+    console.log()
+    let newPolicy = {
+      metadata:{
+        AI_safety_score: policy.metadata.AI_safety_score,
+        deductible: policy.metadata.collision_coverage.deductible,
+        price:policy.metadata.premium_details.annual_premium,
+      },
+      sections:policy.sections,
+      title:policy.type,
+  
+    }
+    policies.push(newPolicy);
+  }
+  // policies[0]
+  return policies;
+}
+
 
 /**
  * 
