@@ -165,13 +165,15 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%; /* Reduce width to show background */
-  margin: 2rem 0; /* Space around container */
+  width: 95%; /* Almost full width */
+  max-width: 1100px; /* Optional max width for large screens */
+  margin: 1rem auto; /* Center the container with space at the top and bottom */
   padding: 2rem;
   background-color: white;
   border-radius: 20px; /* Rounder corners */
   box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
   text-align: center;
+  box-sizing: border-box;
 }
 
 .meta-data {
@@ -190,6 +192,7 @@ img {
   width: 100%;
   text-align: center;
   margin: 0.5rem 0;
+  font-size: 1.5rem;
 }
 
 .label {
@@ -217,6 +220,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%; /* Full viewport height */
   padding: 1rem; /* Padding around the entire container */
 }
 
@@ -233,3 +237,4 @@ img {
   color: #5743D3;
 }
 </style>
+
