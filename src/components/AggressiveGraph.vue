@@ -84,8 +84,10 @@ export default {
       // Set the initial percentage value for the main doughnut chart
       percentage: 25,
       // DATA FOR SPEED
-      speedVector: this.speedData.speed,
-      balanceVector: this.speedData.balance,
+      // speedVector: this.speedData.speed,
+      speedVector: [20, 40, 60, 80, 100],
+      // balanceVector: this.speedData.balance,
+      balanceVector: [50, 420, 42, 300, 250],
       economicVector: this.speedData.economic,
       totalVector: this.speedData.total,
       // DATA FOR AGGRESSIVE
@@ -103,11 +105,11 @@ export default {
 
       // Data and options for the line chart
       lineChartData: {
-        labels: ['January', 'February', 'March'],
+        labels: this.speedVector,
         datasets: [
           {
             label: 'Monthly Sales',
-            data: [40, 20, 12],
+            data: this.balanceVector,
             borderColor: '#5743D3',
             backgroundColor: 'rgba(87, 67, 211, 0.2)',
             borderWidth: 2,
@@ -127,7 +129,9 @@ export default {
         },
         scales: {
           y: {
-            beginAtZero: true,
+            beginAtZero: false,
+            min: Math.min(1),
+            max: Math.max(600),
           },
         },
       },

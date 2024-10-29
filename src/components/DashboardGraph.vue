@@ -45,7 +45,6 @@ async function getData(urlSuffix) {
 onMounted(async () => {
   const aggressivenessRetObj = await getData('aggressive');
   state.aggressivenessData = cleanAggressive(aggressivenessRetObj);
-  debugger
   const s = state;
   console.log(state.aggressivenessData)
   console.log(aggressivenessRetObj)
