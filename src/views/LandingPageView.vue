@@ -7,15 +7,18 @@
       </div>
       <h1 class="title">Policy Royale</h1>
       <h2 class="subtitle">Welcome back</h2>
-      <p class="description">
-        Your all in one policy creation and managment solution.
-      </p>
+      <!-- 动态显示 description -->
+      <p class="description" @click="increasePage()">{{ currentDescription }}</p>
 
       <!-- Pagination dots -->
-      <div class="pagination-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <div class="pagination-dots" @click="increasePage()">
+        <span 
+          v-for="(dot, index) in descriptions.length" 
+          :key="index" 
+          class="dot" 
+          :class="{ active: currentPage === index }" 
+          @click="setPage(index)"
+        ></span>
       </div>
 
       <!-- Create Profile Button -->
@@ -27,9 +30,34 @@
 <script>
 export default {
   name: 'SmartBankingView',
+  data() {
+    return {
+      currentPage: 0,
+      descriptions: [
+        "Your all in one policy creation and management solution.",
+        "Data Queens, always reliable!!",
+        "The BEST AI generation policy for AV insurance in the world."
+      ]
+    };
+  },
+  computed: {
+    currentDescription() {
+      return this.descriptions[this.currentPage];
+    }
+  },
   methods: {
+    increasePage(){
+      if (this.currentPage < 2){
+        this.currentPage++;
+      } else{
+        this.currentPage = 0;
+      }
+    },
+    setPage(index) {
+      this.currentPage = index;
+    },
     goToCreateProfile() {
-      this.$router.push('/create-profile'); 
+      this.$router.push('/create-profile');
     }
   }
 };
@@ -91,7 +119,6 @@ export default {
 /* Title and subtitle */
 .title {
   font-family: Helvetica, Arial, sans-serif;
-  
   padding-bottom: 4rem;
   color: white;
   font-size: 3.8rem;
@@ -124,6 +151,7 @@ export default {
   height: 8px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .dot.active {
