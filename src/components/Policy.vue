@@ -5,7 +5,6 @@
       <!-- display of the policy high level data -->
       <div class="meta-data">
         <div class="policy-row">
-          <!-- +1 to account for 0 based indexing -->
           <h1>The {{ state.title }}</h1>
         </div>
 
@@ -20,28 +19,28 @@
           <div class="label">Price:</div>
           <div class="policy-text">{{ state.price }}</div>
         </div>
-
         <div class="policy-row">
           <div class="label">Deductible:</div>
           <div class="policy-text">{{ state.deductible }}</div>
         </div>
-
         <div class="policy-row">
           <div class="label">AI Safety Score:</div>
           <div class="policy-text">{{ state.aiSafetyScore }}</div>
         </div>
+
+        <!-- Button Container now inside Meta Data Container -->
+        <div class="button-container">
+          <button @click="openPolicyModal"><i class="fa-regular fa-file-lines"></i></button>
+          <button @click="removePolicyOption"><i class="fa-light fa-x"></i></button>
+          <button><i id="heart" class="fa-solid fa-heart"></i></button>
+          <button><i class="fa-sharp fa-light fa-ellipsis"></i></button>
+        </div>
       </div>
       <button class="swipe" @click="swipe('right')">></button>
     </div>
-
-    <div class="button-container sticky-bottom">
-      <button @click="openPolicyModal"><i class="fa-regular fa-file-lines"></i></button>
-      <button @click="removePolicyOption"><i class="fa-light fa-x"></i></button>
-      <button><i id="heart" class="fa-solid fa-heart"></i></button>
-      <button><i class="fa-sharp fa-light fa-ellipsis"></i></button>
-    </div>
   </div>
 </template>
+
 
 
 <script setup>
