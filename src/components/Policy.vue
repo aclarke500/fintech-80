@@ -110,7 +110,6 @@ function mapTitleToImgUrl(title) {
 </script>
 
 <style scoped>
-
 #heart {
   color: red;
 }
@@ -124,55 +123,17 @@ img {
   object-fit: cover;
 }
 
-.button-container {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  
-  padding: 1.5rem;
-  width: 100%;
-  height: 10%;
-  
-}
-
-.button-container button {
-  flex: 1;
-  max-width: 3rem;
-  width: 3rem;
-  height: 3rem;
-  background-color: white;
- 
-  color: black;
-  font-size: 1.5rem;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 1rem;
-  
-}
-
-.button-container button:hover {
-  background-color: #e0e0e0;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.sticky-bottom {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 1rem;
-  text-align: center;
-}
-
 .meta-data-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 95%; /* Almost full width */
-  max-width: 1100px; /* Optional max width for large screens */
-  margin: 1rem auto; /* Center the container with space at the top and bottom */
+  flex-direction: column; /* Stack content vertically for responsiveness */
+  width: 95%;
+  max-width: 1100px;
+  margin: 1rem auto;
   padding: 2rem;
   background-color: white;
-  border-radius: 20px; /* Rounder corners */
+  border-radius: 20px;
   box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
   text-align: center;
   box-sizing: border-box;
@@ -183,6 +144,8 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
 .policy-row {
@@ -207,6 +170,35 @@ img {
   color: #7357D9;
 }
 
+/* Flex container for button arrangement */
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1.5rem;
+  width: 100%;
+  height: auto;
+}
+
+.button-container button {
+  flex: 1;
+  max-width: 4rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%; /* Make buttons circular */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-container button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .photos-container {
   width: 100%;
   display: flex;
@@ -222,8 +214,8 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Full viewport height */
-  padding: 1rem; /* Padding around the entire container */
+  height: 100%;
+  padding: 1rem;
 }
 
 /* Arrow buttons styling */
@@ -238,5 +230,45 @@ img {
 .swipe:hover {
   color: #5743D3;
 }
-</style>
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .meta-data-container {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .policy-row {
+    font-size: 1.2rem;
+  }
+
+  .button-container {
+    padding: 1rem;
+  }
+
+  .button-container button {
+    max-width: 3rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meta-data-container {
+    padding: 0.5rem;
+  }
+
+  .policy-row {
+    font-size: 1rem;
+    flex-direction: column;
+  }
+
+  .button-container button {
+    max-width: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}
+</style>
