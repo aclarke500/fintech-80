@@ -1,63 +1,48 @@
 <template>
   <div class="parent-container">
-
-
     <div class="meta-data-container">
-      <button class="swipe" @click="swipe('left')">
-        < </button>
-          <!-- display of the policy high level data -->
-          <div class="meta-data">
-            <div class="policy-row">
-              <!-- +1 to account for 0 based indexing -->
-              <h1>The {{ state.title }}</h1>
-            </div>
+      <button class="swipe" @click="swipe('left')"> < </button>
+      <!-- display of the policy high level data -->
+      <div class="meta-data">
+        <div class="policy-row">
+          <!-- +1 to account for 0 based indexing -->
+          <h1>The {{ state.title }}</h1>
+        </div>
 
-            <div class="photos-container">
-              <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus"
-                @click="openPolicyModal" />
-              <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus"
-                @click="openPolicyModal" />
-              <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus"
-                @click="openPolicyModal" />
-            </div>
+        <div class="photos-container">
+          <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus" @click="openPolicyModal" />
+        </div>
 
+        <!-- Labeled Policy Details -->
+        <div class="policy-row">
+          <div class="label">Price:</div>
+          <div class="policy-text">{{ state.price }}</div>
+        </div>
 
-            <div class="policy-row">
-              <div class="policy-text"> {{ state.price }}</div>
-            </div>
+        <div class="policy-row">
+          <div class="label">Deductible:</div>
+          <div class="policy-text">{{ state.deductible }}</div>
+        </div>
 
-            <div class="policy-row">
-              <div class="policy-text">{{ state.deductible}}</div>
-            </div>
-
-            <div class="policy-row">
-              <div class="policy-text">{{ state.aiSafetyScore }}</div>
-            </div>
-
-
-          </div>
-          <button class="swipe" @click="swipe('right')">></button>
-
+        <div class="policy-row">
+          <div class="label">AI Safety Score:</div>
+          <div class="policy-text">{{ state.aiSafetyScore }}</div>
+        </div>
+      </div>
+      <button class="swipe" @click="swipe('right')">></button>
     </div>
-
 
     <div class="button-container sticky-bottom">
-      <button @click="openPolicyModal">
-        <i class="fa-regular fa-file-lines"></i>
-      </button>
-      <button @click="removePolicyOption">
-        <i class="fa-light fa-x"></i>
-      </button>
-      <button>
-        <i id="heart" class="fa-solid fa-heart"></i>
-      </button>
-      <button>
-        <i class="fa-sharp fa-light fa-ellipsis"></i>
-      </button>
+      <button @click="openPolicyModal"><i class="fa-regular fa-file-lines"></i></button>
+      <button @click="removePolicyOption"><i class="fa-light fa-x"></i></button>
+      <button><i id="heart" class="fa-solid fa-heart"></i></button>
+      <button><i class="fa-sharp fa-light fa-ellipsis"></i></button>
     </div>
-
   </div>
 </template>
+
 
 <script setup>
 import { reactive, watch } from 'vue';
@@ -139,16 +124,6 @@ img {
   object-fit: cover;
 }
 
-#policy-icon {
-  color: #7357D9;
-  height: 100px;
-}
-
-.tinder-button {
-  color: #7357D9;
-  height: 100px;
-}
-
 .button-container {
   display: flex;
   justify-content: space-evenly;
@@ -207,34 +182,25 @@ img {
   align-items: center;
 }
 
-.meta-data-container button {
-  flex: 1/4;
-  background-color: rgba(255, 0, 0, 0);
-  border: none;
-  color: black;
-  padding: 15px 32px;
-  text-align: center;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-  height: 1rem;
-}
-
 .policy-row {
   display: flex;
-  flex: 3;
   align-items: center;
   justify-content: center;
   color: #7357D9;
   word-wrap: break-word;
   width: 100%;
   text-align: center;
+  margin: 0.5rem 0;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: #333;
 }
 
 .policy-text {
   color: #7357D9;
-  margin: 0.5rem;
 }
 
 .photos-container {
@@ -245,21 +211,6 @@ img {
   margin: 1rem;
   height: 30%;
   max-height: 30%;
-}
-
-.parent-container font-awesome-icon {
-  color: white;
-  height: 100px;
-}
-
-.policy-row h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0.5rem;
 }
 
 .parent-container {
