@@ -110,6 +110,7 @@ function mapTitleToImgUrl(title) {
 </script>
 
 <style scoped>
+
 #heart {
   color: red;
 }
@@ -127,25 +128,26 @@ img {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: rgb(27, 42, 59);
-  padding: 1rem;
-  border-radius: 1rem;
+  
+  padding: 1.5rem;
   width: 100%;
   height: 10%;
-  border-top: 3px solid #7357D9;
+  
 }
 
 .button-container button {
   flex: 1;
   max-width: 3rem;
-  aspect-ratio: 1 / 1;
+  width: 3rem;
+  height: 3rem;
   background-color: white;
-  border: black 1px solid;
+ 
   color: black;
   font-size: 1.5rem;
   text-align: center;
-  padding: 0;
   cursor: pointer;
+  border-radius: 1rem;
+  
 }
 
 .button-container button:hover {
