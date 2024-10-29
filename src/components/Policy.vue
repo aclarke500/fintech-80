@@ -31,7 +31,7 @@
             </div>
 
             <div class="policy-row">
-              <div class="policy-text">Model: {{ state.aiSafetyScore }}</div>
+              <div class="policy-text">{{ state.aiSafetyScore }}</div>
             </div>
 
 
@@ -130,7 +130,6 @@ function mapTitleToImgUrl(title) {
   color: red;
 }
 
-
 img {
   width: 150%;
   max-width: 500px;
@@ -138,40 +137,34 @@ img {
   height: auto;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-  /* height: 30%; */
 }
 
 #policy-icon {
-  color: white;
+  color: #7357D9;
   height: 100px;
 }
 
 .tinder-button {
-  color: black;
+  color: #7357D9;
   height: 100px;
 }
 
 .button-container {
   display: flex;
   justify-content: space-evenly;
-  /* Evenly distributes buttons across the container */
   align-items: center;
-  background-color: rgb(27 42 59);
+  background-color: rgb(27, 42, 59);
   padding: 1rem;
   border-radius: 1rem;
   width: 100%;
   height: 10%;
-  /* Adjusts to content size */
-  border-top: 3px solid black;
+  border-top: 3px solid #7357D9;
 }
 
 .button-container button {
   flex: 1;
-  /* Allows each button to grow equally */
   max-width: 3rem;
-  /* Sets max width for square shape */
   aspect-ratio: 1 / 1;
-  /* Keeps buttons square */
   background-color: white;
   border: black 1px solid;
   color: black;
@@ -183,49 +176,44 @@ img {
 
 .button-container button:hover {
   background-color: #e0e0e0;
-  /* Slightly darker background */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  /* Adds shadow */
 }
-
 
 .sticky-bottom {
   position: fixed;
   bottom: 0;
   width: 100%;
-  /* Optional: make it full width */
   padding: 1rem;
-  /* Optional: padding for space */
   text-align: center;
-  /* Optional: center-align content */
 }
-
 
 .meta-data-container {
   display: flex;
-  flex-direction: row;
-  /* Change to row to align items horizontally */
-  justify-content: center;
-  align-items: top;
-  margin: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 30px 20px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
+  text-align: center;
 }
 
 .meta-data {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex: 5;
+  align-items: center;
 }
 
 .meta-data-container button {
   flex: 1/4;
-  /* Adjusts button to occupy space on either side */
   background-color: rgba(255, 0, 0, 0);
   border: none;
-  color: white;
+  color: black;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
@@ -233,39 +221,27 @@ img {
   height: 1rem;
 }
 
-/* .meta-data-container button{
-
-} */
-
-
-
-.meta-data-container button:active {
-  background-color: #1f4317;
-}
-
 .policy-row {
   display: flex;
   flex: 3;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #7357D9;
   word-wrap: break-word;
-  /* max-width: 80%; */
   width: 100%;
   text-align: center;
 }
 
 .policy-text {
-  color: white;
+  color: #7357D9;
   margin: 0.5rem;
 }
 
-
 .photos-container {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin: 1rem;
   height: 30%;
   max-height: 30%;
@@ -283,7 +259,6 @@ h4,
 h5,
 h6,
 p {
-  /* color: white; */
   margin: 0.5rem;
 }
 
@@ -292,5 +267,18 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/* Arrow buttons styling */
+.swipe {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7357D9;
+}
+
+.swipe:hover {
+  color: #5743D3;
 }
 </style>
