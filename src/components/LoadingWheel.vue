@@ -2,7 +2,7 @@
 import { reactive, onMounted, onUnmounted } from 'vue';
 const props = defineProps(['messages']);
 const state = reactive({
-  message: ''
+  message: 'Fetching data...',
 });
 
 const messages = [
@@ -30,7 +30,7 @@ async function load() {
 
 let interval;
 onMounted(async () => {
-  state.message = getRandomMessage();
+  // state.message = getRandomMessage();
   
   // Change message every 2 seconds
   interval = setInterval(async () => {
@@ -55,7 +55,7 @@ function wait(ms) {
   <div class="spinner">
     <i class="fa fa-spinner fa-spin"></i>
   </div>
-  <div v-if="props.messages">{{ state.message }}</div>
+  <div id="message"v-if="props.messages">{{ state.message }}</div>
 </template>
 
 <style scoped>
@@ -63,6 +63,12 @@ div.spinner {
   font-size: 30px;
   text-align: center;
   color: #aaa;
+  padding-top: 20px;
+}
+#message {
+  font-size: 20px;
+  text-align: center;
+  color: #f2f2f2;
   padding-top: 20px;
 }
 </style>
