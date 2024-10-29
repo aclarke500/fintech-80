@@ -64,6 +64,16 @@ const sections = ref([
       '"Cool quick claims management"'
     ],
     // image: '@/assets/testimonials.jpg'
+  },
+  {
+    name: 'aboutUs',
+    title: 'About Us',
+    heading: 'Policy Royale',
+    description: [
+      'We are Data Queens, and our Policy Royale is designed to empower clients worldwide with data-driven insights and solutions.',
+      'Contact us at service@dataqueens.com'
+    ],
+    // image: '@/assets/about_us.jpg'
   }
 ]);
 
@@ -148,6 +158,11 @@ function openForm() {
 .card-content h3 {
   margin-top: 10px;
   font-size: 1.3rem;
+  margin-bottom: 35px;
+}
+.card-content h4 {
+  font-size: 1rem;
+  margin-top: 15px; 
 }
 
 .card-content p {
