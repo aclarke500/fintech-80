@@ -2,8 +2,10 @@
   <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
     @close="state.showPolicyModal = false" />
   <LoadingWheel v-if="state.isLoading" :messages="true"/>
-  <Policy v-if="state.selectedPolicy" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
-    @swipe="(d) => swipeCards(d)" @openModal="() => openPolicyModal()" @remove="(idx) => removePolicyOption(idx)" />
+  <Policy v-if="state.selectedPolicy" :policy="state.selectedPolicy" 
+  :index="state.indexOfSelectedPolicy"
+    @swipe="(d) => swipeCards(d)" @openModal="() => openPolicyModal()" 
+    @remove="(idx) => removePolicyOption(idx)" />
 </template>
 <script setup>
 import { onMounted, reactive, computed } from 'vue';
@@ -12,6 +14,7 @@ import store from '@/store';
 import Policy from '@/components/Policy.vue';
 import PolicyModal from '@/components/PolicyModal.vue';
 import LoadingWheel from '@/components/LoadingWheel.vue';
+import { cleanPolicies } from '@/utils/clean';
 
 const router = useRouter();
 
@@ -91,32 +94,84 @@ function openPolicyModal() {
 onMounted(async () => {
   // mock data
   if (!store.formClient) {
-    const localPolicy = {
-      metadata: {
-        AI_safety_score: 90,
-        deductible: 750,
-        driver_behaviour: "Highly educated and generally safe, but has a history of high-speed accidents.",
-        price: 200
+    alert('no form data')
+    state.policies = [ {
+    metadata: {
+      AI_safety_score: 85,
+      deductible: 500,
+      driver_behaviour: "Safe and cautious driver with no history of accidents.",
+      price: 150
+    },
+    section_title: "Balanced",
+    title:'balanced',
+    sections: [
+      {
+        section_content: "Moderate coverage with collision, liability, and basic personal injury protection. Suitable for general driving needs.",
+        section_title: "Coverage and Clauses"
       },
-      section_title: "Total Insurance",
-      sections: [
-        {
-          section_content: "Comprehensive coverage including collision, liability, underinsured motorist coverage, and AV-specific clauses for autonomous operations. Includes personal injury protection with high limits for medical expenses and lost wages.",
-          section_title: "Coverage and Clauses"
-        },
-        {
-          section_content: "Full liability coverage with high limits per person and per accident. The policy covers all autonomous and manual operations with no distinction in responsibility, ensuring peace of mind for the user.",
-          section_title: "Liability and Responsibilities"
-        },
-        {
-          section_content: "Premium pricing with flexible payment options including Monthly, Quarterly, Semi-Annually, and Annually with a 5% discount on annual payments. Additional discounts for safe driving, multi-vehicle, and educational achievements.",
-          section_title: "Pricing and Payment"
-        }
-      ]
-    };
-    state.isLoading = false;
+      {
+        section_content: "Basic liability coverage with moderate limits per person and per accident. Provides peace of mind for daily commutes.",
+        section_title: "Liability and Responsibilities"
+      },
+      {
+        section_content: "Affordable pricing with payment options Monthly and Quarterly, with a 3% discount on annual payments.",
+        section_title: "Pricing and Payment"
+      }
+    ]
+  },
+  {
+    metadata: {
+      AI_safety_score: 70,
+      deductible: 1000,
+      driver_behaviour: "Frequent but cautious driver, some history of minor infractions.",
+      price: 100
+    },
+    section_title: "Economic",
+    title:'economy',
+    sections: [
+      {
+        section_content: "Essential coverage including basic liability and collision with low limits. Ideal for budget-conscious drivers.",
+        section_title: "Coverage and Clauses"
+      },
+      {
+        section_content: "Minimal liability coverage with low per person and accident limits, covering basic needs.",
+        section_title: "Liability and Responsibilities"
+      },
+      {
+        section_content: "Low-cost pricing with Monthly payments, ideal for entry-level policyholders.",
+        section_title: "Pricing and Payment"
+      }
+    ]
+  },
+  {
+    metadata: {
+      AI_safety_score: 90,
+      deductible: 750,
+      driver_behaviour: "Highly educated and generally safe, but has a history of high-speed accidents.",
+      price: 200
+    },
+    section_title: "Total Insurance",
+    title:'total_insurance',
+    sections: [
+      {
+        section_content: "Comprehensive coverage including collision, liability, underinsured motorist coverage, and AV-specific clauses for autonomous operations. Includes personal injury protection with high limits for medical expenses and lost wages.",
+        section_title: "Coverage and Clauses"
+      },
+      {
+        section_content: "Full liability coverage with high limits per person and per accident. The policy covers all autonomous and manual operations with no distinction in responsibility, ensuring peace of mind for the user.",
+        section_title: "Liability and Responsibilities"
+      },
+      {
+        section_content: "Premium pricing with flexible payment options including Monthly, Quarterly, Semi-Annually, and Annually with a 5% discount on annual payments. Additional discounts for safe driving, multi-vehicle, and educational achievements.",
+        section_title: "Pricing and Payment"
+      }
+    ]
+  }];
+    const localPolicy = state.policies[0];
+    
     state.selectedPolicy = localPolicy;
-    state.policies = [localPolicy];
+    // state.policies = [localPolicy];
+    state.isLoading = false;
     return;
   }
   //
@@ -142,12 +197,17 @@ onMounted(async () => {
   })
     .then(response => response.json())
     .then(data => {
+      // debugger
       console.log("Success:", data);
-      alert('backend worked')
+      // alert('backend worked')
       // we got the data
       state.isLoading = false;
-      state.selectedPolicy = data.sections[0];
-      state.policies = data.sections;
+      const policies = cleanPolicies(data)
+      state.policies = policies;
+      state.selectedPolicy = policies[0];
+      // const d = data
+      // state.policies = cleanPolicies(data);
+      console.log(state.policies)
     })
     .catch(error => {
       console.error("Error:", error);

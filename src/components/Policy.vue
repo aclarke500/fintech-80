@@ -7,13 +7,13 @@
       <!-- Policy high-level data -->
       <div class="meta-data">
         <div class="policy-row">
-          <h1>The {{ state.title }}</h1>
+          <h1>The Choices</h1>
         </div>
 
         <div class="photos-container">
-          <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus" @click="openPolicyModal" />
-          <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus" @click="openPolicyModal" />
-          <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="props.policy.title == 'total_insurance'" src="../assets/umbrella.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="props.policy.title== 'economy'" src="../assets/cheap.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="props.policy.title == 'balanced'" src="../assets/balance.png" alt="plus" @click="openPolicyModal" />
         </div>
 
         <!-- Labeled Policy Details -->
@@ -48,7 +48,7 @@
 
 
 <script setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch, } from 'vue';
 import store from '@/store';
 const props = defineProps(['policy', 'index']);
 const emits = defineEmits(['swipe', 'openModal']);
@@ -60,7 +60,13 @@ const state = reactive({
   aiSafetyScore: props.policy.AI_safety_score,
   deductible: props.policy.metadata.deductible,
   price: props.policy.metadata.price,
-  title: props.policy.section_title,
+  // title: props.policy.section_title,
+  title:props.policy.title,
+  // name:computed(()=>{
+  //   if(props.title=='total_insurance') return 'Umbrella';
+  //   if(props.title=='economy') return 'Economy';
+  //   if(props.title=='balanced') return 'Compromise';
+  // })
 
 });
 
