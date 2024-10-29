@@ -2,11 +2,20 @@
   <div id="policyModal" class="modal">
     <div class="modal-content">
       <div class="modal-top">
-        <div class="title">{{ props.policy.policyName }} Policy</div>
+        <div class="title">{{ props.policy.section_title }} Policy</div>
         <div class="close" @click="closeModal">&times;</div>
       </div>
       <div class="modal-body">
-        <p>{{ props.policyText }}</p>
+        <div class="section" v-for="(section) in props.policy.sections" :key="section">
+          <div class="section-title">
+            <h2>{{section.section_title}}</h2>
+          </div>
+          <div class="section-content">
+
+            <p>{{ section.section_content }}</p>
+          </div>
+        </div>
+        <!-- <p>{{ props.policy.sections }}</p> -->
       </div>
     </div>
   </div>
@@ -96,4 +105,6 @@ function closeModal() {
     opacity: 1;
   }
 }
+
+
 </style>

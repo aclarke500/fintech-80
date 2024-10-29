@@ -1,7 +1,7 @@
 <template>
-  <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy" :policyText="state.selectedPolicy.policyText"
-    :index="state.indexOfSelectedPolicy" @close="state.showPolicyModal = false" />
-
+  <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
+    @close="state.showPolicyModal = false" />
+  <LoadingWheel v-if="state.isLoading" :messages="true"/>
   <Policy v-if="state.selectedPolicy" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
     @swipe="(d) => swipeCards(d)" @openModal="() => openPolicyModal()" @remove="(idx) => removePolicyOption(idx)" />
 </template>
@@ -11,10 +11,12 @@ import { useRouter } from 'vue-router';
 import store from '@/store';
 import Policy from '@/components/Policy.vue';
 import PolicyModal from '@/components/PolicyModal.vue';
+import LoadingWheel from '@/components/LoadingWheel.vue';
 
 const router = useRouter();
 
 const state = reactive({
+  isLoading: false,
   showPolicyModal: false,
   selectedPolicy: null,
   // auto update the index when selected policy changes
@@ -43,8 +45,6 @@ const state = reactive({
     }
   ]
 });
-
-console.log(store.formClient)
 
 
 function swipeCards(direction) {
@@ -89,17 +89,46 @@ function openPolicyModal() {
 
 
 onMounted(async () => {
-  state.selectedPolicy = state.policies[0];
-
-  // Handle cases where no data is available
+  // mock data
   if (!store.formClient) {
+    const localPolicy = {
+      metadata: {
+        AI_safety_score: 90,
+        deductible: 750,
+        driver_behaviour: "Highly educated and generally safe, but has a history of high-speed accidents.",
+        price: 200
+      },
+      section_title: "Total Insurance",
+      sections: [
+        {
+          section_content: "Comprehensive coverage including collision, liability, underinsured motorist coverage, and AV-specific clauses for autonomous operations. Includes personal injury protection with high limits for medical expenses and lost wages.",
+          section_title: "Coverage and Clauses"
+        },
+        {
+          section_content: "Full liability coverage with high limits per person and per accident. The policy covers all autonomous and manual operations with no distinction in responsibility, ensuring peace of mind for the user.",
+          section_title: "Liability and Responsibilities"
+        },
+        {
+          section_content: "Premium pricing with flexible payment options including Monthly, Quarterly, Semi-Annually, and Annually with a 5% discount on annual payments. Additional discounts for safe driving, multi-vehicle, and educational achievements.",
+          section_title: "Pricing and Payment"
+        }
+      ]
+    };
+    state.isLoading = false;
+    state.selectedPolicy = localPolicy;
+    state.policies = [localPolicy];
     return;
   }
-
-  // JSON stringify for the call
-  const data = JSON.stringify({ 
+  //
+  state.isLoading = true;
+  const data = JSON.stringify({
     term: JSON.stringify(store.formClient)
   });
+
+  //   state.isLoading = false;
+
+
+
   console.log(data)
   const url = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/search';
 
@@ -114,6 +143,11 @@ onMounted(async () => {
     .then(response => response.json())
     .then(data => {
       console.log("Success:", data);
+      alert('backend worked')
+      // we got the data
+      state.isLoading = false;
+      state.selectedPolicy = data.sections[0];
+      state.policies = data.sections;
     })
     .catch(error => {
       console.error("Error:", error);
