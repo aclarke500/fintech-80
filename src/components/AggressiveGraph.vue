@@ -82,7 +82,8 @@ export default {
   data() {
     return {
       // Set the initial percentage value for the main doughnut chart
-      percentage: 25,
+      percentage: Math.floor(Math.random() * 98) + 1,
+      // percentage: Math.min(this.data.speeds[0],this.data.speeds[1]) / Math.max(this.data.speeds[0],this.data.speeds[1]) * 100,
       // DATA FOR SPEED
       speedVector: this.speedData.speeds,
       // speedVector: [20, 40, 60, 80, 100],
