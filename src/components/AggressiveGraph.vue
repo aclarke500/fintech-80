@@ -89,6 +89,7 @@ export default {
       balanceVector: this.speedData.balanced,
       // balanceVector: [50, 420, 42, 300, 250],
       economicVector: this.speedData.economic,
+      // TODO there's nothing in total coverage
       totalVector: this.speedData.totalCoverage,
       // DATA FOR AGGRESSIVE
       /**
@@ -127,8 +128,20 @@ export default {
             pointBorderColor: '#43D38D',
             tension: 0.4,
           }
+          ,
+          {
+            label: 'Total Coverage',          // Third line label
+            data: this.speedData.total, // Third line data
+            borderColor: '#D34343',           // Color of the third line
+            backgroundColor: 'rgba(211, 67, 67, 0.2)', 
+            borderWidth: 2,
+            pointBackgroundColor: '#D34343',
+            pointBorderColor: '#D34343',
+            tension: 0.4,
+          }
         ],
       },
+
 
       lineChartOptions: {
         responsive: true,
@@ -142,7 +155,7 @@ export default {
           y: {
             beginAtZero: false,
             min: Math.min(this.speedData.speeds),
-            max: Math.max(this.speedData.balanced),
+            max: Math.max(this.speedData.totalCoverage),
           },
         },
       },
