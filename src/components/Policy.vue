@@ -166,11 +166,11 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  margin: 30px 20px;
-  padding: 30px;
+  width: 90%; /* Reduce width to show background */
+  margin: 2rem 0; /* Space around container */
+  padding: 2rem;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 20px; /* Rounder corners */
   box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
   text-align: center;
 }
@@ -218,6 +218,7 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem; /* Padding around the entire container */
 }
 
 /* Arrow buttons styling */
