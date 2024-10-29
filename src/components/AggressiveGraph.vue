@@ -30,7 +30,15 @@
           </div>
         </div>
       </div>
-      <!-- Line Chart -->
+      <!-- Line Chart 1 -->
+      <div class="line-chart-wrapper">
+        <Line
+          id="my-line-chart"
+          :options="lineChartOptions"
+          :data="lineChartData"
+        />
+      </div>
+      <!-- Line Chart 2 -->
       <div class="line-chart-wrapper">
         <Line
           id="my-line-chart"
