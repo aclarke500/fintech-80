@@ -1,88 +1,117 @@
 <template>
-    <div class="chart-container">
-      <Line :data="chartData" :options="chartOptions" />
-    </div>
+    <div class="doughnut-wrapper">
+        <Doughnut
+          id="my-doughnut-chart"
+          :options="doughnutChartOptions"
+          :data="doughnutChartData"
+        />
+        <div class="doughnut-center-text">{{ doughnutChartData.datasets[0].data[0] }}</div>
+      </div>
   </template>
   
   <script>
-  import { Line } from 'vue-chartjs'
-  import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale } from 'chart.js'
+   import { Bar, Doughnut } from 'vue-chartjs';
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+  } from 'chart.js';
   
-  ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale)
+  ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    ArcElement,
+    CategoryScale,
+    LinearScale
+  );
   
   export default {
-    name: 'LineGraph',
-    components: { Line },
-    props: {
-      labels: {
-        type: Array,
-        default: () => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-      },
-      data: {
-        type: Array,
-        default: () => [30, 45, 32, 60, 75, 80, 70, 90, 85, 100, 95, 110] // Sample monthly data
-      },
-      datasetLabel: {
-        type: String,
-        default: 'Monthly Sales'
-      }
-    },
-    computed: {
-      chartData() {
-        return {
-          labels: this.labels,
-          datasets: [
-            {
-              label: this.datasetLabel,
-              data: this.data,
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              borderWidth: 2,
-              pointRadius: 5,
-              pointHoverRadius: 7,
-              tension: 0.4 // Smooth line
-            }
-          ]
-        }
-      }
-    },
+    name: 'BarAndDoughnutChart',
+    components: { Bar, Doughnut },
     data() {
       return {
-        chartOptions: {
+        // Data and options for the bar chart
+        barChartData: {
+          labels: ['January', 'February', 'March'],
+          datasets: [
+            {
+              label: 'Monthly Sales',
+              data: [40, 20, 12],
+              backgroundColor: '#3b82f6',
+            },
+          ],
+        },
+        barChartOptions: {
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
             legend: {
               display: true,
-              position: 'top'
             },
-            title: {
-              display: true,
-              text: this.datasetLabel,
-              font: {
-                size: 18
-              }
-            }
           },
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Sales ($)'
-              }
+        },
+        // Data and options for the doughnut (gauge) chart
+        doughnutChartData: {
+          labels: ['Score', 'Remaining'],
+          datasets: [
+            {
+              data: [90, 8],
+              backgroundColor: ['#3b82f6', '#e5e7eb'],
+              borderWidth: 0,
             },
-            x: {
-              title: {
-                display: true,
-                text: 'Month'
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+          ],
+        },
+        doughnutChartOptions: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '80%',
+          rotation: -90,
+          circumference: 180,
+          plugins: {
+            tooltip: {
+              enabled: false,
+            },
+            legend: {
+              display: false,
+            },
+          },
+        },
+        // Data and options for the circular indicator
+        indicatorData: {
+          labels: ['Progress', 'Remaining'],
+          datasets: [
+            {
+              data: [4, 6],
+              backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for progress, light gray for remaining
+              borderWidth: 0,
+            },
+          ],
+        },
+        indicatorOptions: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '80%', // Makes it circular with a hole in the center
+          rotation: -90,
+          circumference: 360, // Full circle for the indicator
+          plugins: {
+            tooltip: {
+              enabled: false,
+            },
+            legend: {
+              display: false,
+            },
+          },
+        },
+      };
+    },
+  };
   </script>
   
   <style scoped>
