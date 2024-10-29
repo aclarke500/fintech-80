@@ -13,18 +13,16 @@
 
     <!-- Circular Indicator Section -->
     <div class="indicator-container">
-      <div class="indicator-section" v-for="(value, index) in indicatorValues" :key="index">
+      <div class="indicator-section" v-for="(indicator, index) in indicators" :key="index">
         <div class="circular-indicator">
-          <Doughnut :data="getIndicatorData(value)" :options="indicatorOptions" />
-          <div class="indicator-center-text">{{ value }}</div>
+          <Doughnut :data="getIndicatorData(indicator.value)" :options="indicatorOptions" />
+          <div class="indicator-center-text">{{ indicator.value }}</div>
         </div>
         <div class="indicator-text">
-          <h4 class="indicator-title">Autonomy Score</h4>
-          <p class="indicator-description">
-            Measure of how often driver intiates autonomy
-          </p>
-          <p class="indicator-source">Bayhealth General</p>
-          <p class="indicator-leader">Led by Kevin McDiarmid and Bayhealth General Hospital</p>
+          <h4 class="indicator-title">{{ indicator.title }}</h4>
+          <p class="indicator-description">{{ indicator.description }}</p>
+          <p class="indicator-source">{{ indicator.source }}</p>
+          <p class="indicator-leader">{{ indicator.leader }}</p>
         </div>
       </div>
     </div>
@@ -110,7 +108,7 @@ export default {
         labels: this.speedData.speeds,
         datasets: [
           {
-            label: 'Monthly Sales',          // First line label
+            label: 'Balanced',          // First line label
             data: this.speedData.balanced,    // First line data
             borderColor: '#5743D3',           // Color of the first line
             backgroundColor: 'rgba(87, 67, 211, 0.2)', 
@@ -166,7 +164,7 @@ export default {
         labels: this.a.ratios,
         datasets: [
           {
-            label: 'Monthly Sales',          // First line label
+            label: 'Balanced',          // First line label
             data: this.a.balanced,    // First line data
             borderColor: '#5743D3',           // Color of the first line
             backgroundColor: 'rgba(87, 67, 211, 0.2)', 
@@ -231,6 +229,32 @@ export default {
           },
         },
       },
+      // INDICATOR STUFF
+      indicators: [
+        {
+          value: 30,
+          title: 'Autonomy Score',
+          description: 'Measure of how often driver initiates autonomy',
+          source: 'Bayhealth General',
+          leader: 'Led by Kevin McDiarmid and Bayhealth General Hospital',
+        },
+        {
+          value: 50,
+          title: 'Efficiency Score',
+          description: 'Shows driver efficiency in various conditions',
+          source: 'National Driving Safety',
+          leader: 'Led by Dr. Amanda Greyson',
+        },
+        {
+          value: 70,
+          title: 'Risk Assessment',
+          description: 'Risk level based on recent driving data',
+          source: 'SafeDrive Analytics',
+          leader: 'Managed by Dr. Samuel Ortega',
+        },
+      ],
+
+      // Options for the circular indicators
       indicatorOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -238,12 +262,8 @@ export default {
         rotation: -90,
         circumference: 360,
         plugins: {
-          tooltip: {
-            enabled: false,
-          },
-          legend: {
-            display: false,
-          },
+          tooltip: { enabled: false },
+          legend: { display: false },
         },
       },
     };
