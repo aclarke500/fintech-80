@@ -65,11 +65,11 @@ async function fetchData() {
 
 onMounted(async () => {
   debugger
-  const s = state;
-  state.aggressivenessData = await getData('aggressive');
-  debugger
-  state.speedData = await getData('speed');
-  const x = 5;
+  // const s = state;
+  // state.aggressivenessData = await getData('aggressive');
+  // debugger
+  // state.speedData = await getData('speed');
+  // const x = 5;
 });
 
 
