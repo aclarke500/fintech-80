@@ -3,12 +3,9 @@
     <DashboardSearchUser v-if="!state.user" id="search" @clicked-pill="(c) => clickedPill(c)" />
   </div>
 
-
   <div class="container" v-if="state.user">
     <DashboardGraph :client="state.user" />
   </div>
-  <p>{{ state.speedData }}
-    {{ state.aggressivenessData }}</p>
 
 </template>
 <script setup>
