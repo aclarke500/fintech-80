@@ -1,8 +1,10 @@
 <template>
   <div class="parent-container">
     <div class="meta-data-container">
-      <button class="swipe" @click="swipe('left')"> < </button>
-      <!-- display of the policy high level data -->
+      <!-- Left arrow button -->
+      <button class="swipe left" @click="swipe('left')">&lt;</button>
+      
+      <!-- Policy high-level data -->
       <div class="meta-data">
         <div class="policy-row">
           <h1>The {{ state.title }}</h1>
@@ -36,7 +38,9 @@
           <button><i class="fa-sharp fa-light fa-ellipsis"></i></button>
         </div>
       </div>
-      <button class="swipe" @click="swipe('right')">></button>
+
+      <!-- Right arrow button -->
+      <button class="swipe right" @click="swipe('right')">&gt;</button>
     </div>
   </div>
 </template>
@@ -114,20 +118,28 @@ function mapTitleToImgUrl(title) {
   color: red;
 }
 
-img {
-  width: 150%;
-  max-width: 500px;
-  max-height: 200px;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
+.photos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.photos-container img {
+  width: 20rem;  /* Fixed width for all images */
+  height: 20rem; /* Fixed height for all images */
+  object-fit: cover; /* Ensures images cover the given area without distortion */
+  border-radius: 8px; /* Optional rounding for consistent styling */
 }
 
 .meta-data-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: column; /* Stack content vertically for responsiveness */
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
   width: 95%;
   max-width: 1100px;
   margin: 1rem auto;
@@ -140,7 +152,6 @@ img {
 }
 
 .meta-data {
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,14 +181,12 @@ img {
   color: #7357D9;
 }
 
-/* Flex container for button arrangement */
 .button-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   padding: 1.5rem;
   width: 100%;
-  height: auto;
 }
 
 .button-container button {
@@ -190,23 +199,13 @@ img {
   font-size: 1.5rem;
   text-align: center;
   cursor: pointer;
-  border-radius: 50%; /* Make buttons circular */
+  border-radius: 50%;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .button-container button:hover {
   background-color: #e0e0e0;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.photos-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-  height: 30%;
-  max-height: 30%;
 }
 
 .parent-container {
@@ -225,6 +224,17 @@ img {
   border: none;
   cursor: pointer;
   color: #7357D9;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swipe.left {
+  left: 1rem;
+}
+
+.swipe.right {
+  right: 1rem;
 }
 
 .swipe:hover {
