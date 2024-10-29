@@ -1,6 +1,7 @@
 <template>
 <div class="container">
 
+<SpeedGraph/>
 <AggressiveGraph/>
 
 <div class="meta-data">
@@ -12,6 +13,7 @@
 <script setup>
 import { reactive } from 'vue';
 import AggressiveGraph from '@/components/AggressiveGraph.vue';
+import SpeedGraph from '@/components/SpeedGraph.vue';
 
 
 const props = defineProps(['client', 'speed', 'aggressive']);
@@ -26,17 +28,12 @@ console.log(props.data);
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  background-color: white;
-  height: 30rem;
-  min-width: 10rem;
-  width: 70%;
-  padding: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Optional shadow for style */
+  min-width: 60%;
+  margin: 1rem 1rem;
+  padding: 30px;
+  background-color: #eae0e0;
   border-radius: 8px;
-  /* Optional rounded corners */
+  box-shadow: 0 4px 4px rgba(12, 12, 12, 0.1);
+  text-align: center;
 }
 </style>
