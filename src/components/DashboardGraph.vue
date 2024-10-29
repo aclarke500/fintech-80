@@ -1,5 +1,8 @@
 <template>
 <div class="container">
+
+<AggressiveGraph/>
+
 <div class="meta-data">
   {{ props.client.name }}
 </div>
@@ -8,6 +11,8 @@
 </template>
 <script setup>
 import { reactive } from 'vue';
+import AggressiveGraph from '@/components/AggressiveGraph.vue';
+
 
 const props = defineProps(['client', 'speed', 'aggressive']);
 console.log(props.client);

@@ -1,5 +1,4 @@
 <template>
-  <AggresiveGraph aria-label="Sales figures for"/>
   <div class="container">
     <DashboardSearchUser v-if="!state.user" id="search" @clicked-pill="(c) => clickedPill(c)" />
   </div>
@@ -13,7 +12,6 @@
 
 </template>
 <script setup>
-import AggressiveGraph from '@/components/AggressiveGraph.vue';
 import { reactive, onMounted } from 'vue';
 import DashboardSearchUser from '@/components/DashboardSearchUser.vue';
 import DashboardGraph from '@/components/DashboardGraph.vue';

@@ -13,7 +13,7 @@
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
   
   export default {
-    name: 'BarChart',
+    name: 'AggressiveGraph',
     components: { Bar },
     data() {
       return {
