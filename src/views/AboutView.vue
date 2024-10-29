@@ -71,7 +71,7 @@ const sections = ref([
     heading: 'Policy Royale',
     description: [
       'We are Data Queens, and our Policy Royale is designed to empower clients worldwide with data-driven insights and solutions.',
-      'Contact us at service@dataqueens.com'
+      'Contact us at service@dataqueens.com and 20vpp@queensu.ca'
     ],
     // image: '@/assets/about_us.jpg'
   }
@@ -110,6 +110,7 @@ function openForm() {
   border: 2px solid #1c38ce;
   color: white;
   display: flex;
+  border-radius: 16px;
   flex-direction: column; /* Change to column to stack title and content */
   align-items: center;
   justify-content: center;
