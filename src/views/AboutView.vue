@@ -5,10 +5,9 @@
       class="bubble bubble-hero"
       @click="setActiveSection('hero')"
       :class="{ active: activeSection === 'hero', inactive: activeSection && activeSection !== 'hero' }"
-      style="background-image: url('@/src/assets/cars.jpg');"
-
+      style="background-image: url('@/assets/cars.jpg');"
     >
-      <h2> Insure your journey </h2>
+      <h2>Insure your journey</h2>
       <div v-if="activeSection === 'hero'" class="bubble-content">
         <div class="hero-content">
           <h1>Your Future of Driving</h1>
@@ -30,12 +29,12 @@
         <div class="row">
           <div class="col feature">
             <i class="fas fa-car-crash"></i>
-            <h3>lots of traning data </h3>
+            <h3>lots of training data</h3>
             <p>The best algorithm in the whole world!!</p>
           </div>
           <div class="col feature">
             <i class="fas fa-shield-alt"></i>
-            <h3>You gotna give yourself an oportunity </h3>
+            <h3>You gotna give yourself an opportunity</h3>
             <h2>Now!!</h2>
           </div>
         </div>
@@ -48,13 +47,13 @@
       @click="setActiveSection('howItWorks')"
       :class="{ active: activeSection === 'howItWorks', inactive: activeSection && activeSection !== 'howItWorks' }"
     >
-      <h2>How it work </h2>
+      <h2>How it works</h2>
       <div v-if="activeSection === 'howItWorks'" class="bubble-content">
-        <h2>1. get a code </h2>
+        <h2>1. Get a quote</h2>
         <div class="steps">
           <div class="step">
-            <h2>2.contact us</h2>
-            <p>but you can do 2 first and we will help you complete 1</p>
+            <h2>2. Contact us</h2>
+            <p>But you can do step 2 first, and we will help you complete step 1.</p>
           </div>
         </div>
       </div>
@@ -82,19 +81,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import router from '@/router'; // router object
-import { useRoute } from 'vue-router';
+import router from '@/router';
 
-const route = useRoute();
-
-const activeSection = ref('');
+const activeSection = ref('hero'); // Set the default active bubble
 
 const setActiveSection = (section) => {
   activeSection.value = activeSection.value === section ? '' : section;
 };
 
 function openForm(){
-  router.push({name:'create-profile'})
+  router.push({ name: 'create-profile' });
 }
 </script>
 
@@ -127,8 +123,8 @@ function openForm(){
   position: absolute;
   transition: transform 0.3s, width 0.3s, height 0.3s;
   background-color: rgba(182, 100, 220, 0.712);
-  
-
+  background-size: cover;
+  background-position: center;
   color: #fff;
 }
 
@@ -139,8 +135,8 @@ function openForm(){
 }
 
 .bubble.inactive {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   opacity: 0.6;
 }
 
