@@ -19,9 +19,9 @@
           <div class="indicator-center-text">{{ value }}</div>
         </div>
         <div class="indicator-text">
-          <h4 class="indicator-title">Reducing Pressure Sores</h4>
+          <h4 class="indicator-title">Autonomy Score</h4>
           <p class="indicator-description">
-            Reduce the proportion of patients with pressure sores by 50% in 12 months
+            Measure of how often driver intiates autonomy
           </p>
           <p class="indicator-source">Bayhealth General</p>
           <p class="indicator-leader">Led by Kevin McDiarmid and Bayhealth General Hospital</p>
@@ -84,12 +84,12 @@ export default {
       // Set the initial percentage value for the main doughnut chart
       percentage: 25,
       // DATA FOR SPEED
-      // speedVector: this.speedData.speed,
-      speedVector: [20, 40, 60, 80, 100],
-      // balanceVector: this.speedData.balance,
-      balanceVector: [50, 420, 42, 300, 250],
+      speedVector: this.speedData.speeds,
+      // speedVector: [20, 40, 60, 80, 100],
+      balanceVector: this.speedData.balanced,
+      // balanceVector: [50, 420, 42, 300, 250],
       economicVector: this.speedData.economic,
-      totalVector: this.speedData.total,
+      totalVector: this.speedData.totalCoverage,
       // DATA FOR AGGRESSIVE
       /**
        * This represents the price paid relatice to how aggressive they are (ratio,
@@ -105,11 +105,11 @@ export default {
 
       // Data and options for the line chart
       lineChartData: {
-        labels: this.speedVector,
+        labels: this.speedData.speeds,
         datasets: [
           {
             label: 'Monthly Sales',
-            data: this.balanceVector,
+            data: this.speedData.balanced,
             borderColor: '#5743D3',
             backgroundColor: 'rgba(87, 67, 211, 0.2)',
             borderWidth: 2,
@@ -130,8 +130,8 @@ export default {
         scales: {
           y: {
             beginAtZero: false,
-            min: Math.min(1),
-            max: Math.max(600),
+            min: Math.min(this.speedData.speeds),
+            max: Math.max(this.speedData.balanced),
           },
         },
       },
