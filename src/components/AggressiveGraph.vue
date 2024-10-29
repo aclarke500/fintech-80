@@ -121,7 +121,7 @@
             {
               label: 'Monthly Sales',
               data: [40, 20, 12],
-              backgroundColor: '#3b82f6',
+              backgroundColor: '#5743D3',
             },
           ],
         },
@@ -140,7 +140,7 @@
           datasets: [
             {
               data: [90, 8],
-              backgroundColor: ['#3b82f6', '#e5e7eb'],
+              backgroundColor: ['#5743D3', '#e5e7eb'],
               borderWidth: 0,
             },
           ],
@@ -166,7 +166,7 @@
           datasets: [
             {
               data: [4, 6],
-              backgroundColor: ['#3b82f6', '#e5e7eb'], // Blue for progress, light gray for remaining
+              backgroundColor: ['#5743D3', '#e5e7eb'], // Blue for progress, light gray for remaining
               borderWidth: 0,
             },
           ],
@@ -196,7 +196,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    /* NOTE add padding to remove the purple border edges */
     background-color: white;
     border-radius: 8px;
   }
@@ -208,7 +208,7 @@
   
   .chart-title {
     font-size: 24px;
-    color: #2c3e50;
+    color: #5743D3;
     margin: 0;
   }
   
@@ -232,7 +232,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 24px;
-    color: #2c3e50;
+    color: #5743D3;
   }
   
   .bar-chart-wrapper {
@@ -266,12 +266,12 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 16px;
-    color: #2c3e50;
+    color: #5743D3;
     font-weight: bold;
   }
   
   .indicator-text {
-    color: #2c3e50;
+    color: #5743D3;
   }
   
   .indicator-title {

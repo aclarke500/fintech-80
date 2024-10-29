@@ -1,14 +1,11 @@
 <template>
-<div class="container">
 
-<SpeedGraph/>
 <AggressiveGraph/>
 
 <div class="meta-data">
   {{ props.client.name }}
 </div>
 
-</div>
 </template>
 <script setup>
 import { reactive } from 'vue';
@@ -23,17 +20,52 @@ console.log(props.data);
 
 
 </script>
-<style scoped>
-
+<style>
 .container {
   display: flex;
   flex-direction: column;
-  min-width: 60%;
-  margin: 1rem 1rem;
-  padding: 30px;
-  background-color: #eae0e0;
-  border-radius: 8px;
-  box-shadow: 0 4px 4px rgba(12, 12, 12, 0.1);
+  width: 100%;
+  max-width: 50rem; /* Equivalent to 800px */
+  margin: 1.5rem auto; /* Reduced margin for less space around the container */
+  padding: 1.5rem;
+  border-radius: 0.5rem;
   text-align: center;
+  box-sizing: border-box;
 }
+
+/* Chart container to hold individual graphs */
+.chart-container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 12.5rem; /* Equivalent to 200px */
+  margin: 1rem 0; /* Adds vertical spacing between graphs */
+}
+
+/* Responsive adjustments for tablets */
+@media (max-width: 48rem) {
+  .container {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto; /* Slightly reduced margin for tablets */
+  }
+
+  .meta-data {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 30rem) {
+  .container {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.75rem auto; /* Reduced margin for mobile screens */
+  }
+
+  .meta-data {
+    font-size: 0.8rem;
+  }
+}
+
 </style>
