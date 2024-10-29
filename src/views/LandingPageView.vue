@@ -8,7 +8,7 @@
       <h1 class="title">Policy Royale</h1>
       <h2 class="subtitle">Welcome back</h2>
       <p class="description">
-        Your all in one policy creation and managment solution.
+        Your AI-Powered Underwriting Agent
       </p>
 
       <!-- Pagination dots -->
