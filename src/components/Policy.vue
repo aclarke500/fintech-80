@@ -9,29 +9,29 @@
           <div class="meta-data">
             <div class="policy-row">
               <!-- +1 to account for 0 based indexing -->
-              <h1>The {{ props.policy.policyName }}</h1>
+              <h1>The {{ state.title }}</h1>
             </div>
 
             <div class="photos-container">
-              <img v-if="props.policy.policyName == 'umbrella'" src="../assets/umbrella.png" alt="plus"
+              <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus"
                 @click="openPolicyModal" />
-              <img v-if="props.policy.policyName == 'cheap'" src="../assets/cheap.png" alt="plus"
+              <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus"
                 @click="openPolicyModal" />
-              <img v-if="props.policy.policyName == 'balance'" src="../assets/balance.png" alt="plus"
+              <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus"
                 @click="openPolicyModal" />
             </div>
-            
+
 
             <div class="policy-row">
-              <div class="policy-text"> {{ props.policy.name }}</div>
-            </div>
-
-            <div class="policy-row">
-              <div class="policy-text">{{ props.policy.carModel }}</div>
+              <div class="policy-text"> {{ state.price }}</div>
             </div>
 
             <div class="policy-row">
-              <div class="policy-text">Model: {{ props.policy.aiModel }}</div>
+              <div class="policy-text">{{ state.deductible}}</div>
+            </div>
+
+            <div class="policy-row">
+              <div class="policy-text">Model: {{ state.aiSafetyScore }}</div>
             </div>
 
 
@@ -60,14 +60,33 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
-
-const state = reactive({
-  src: '../assets/plus.png'
-});
+import { reactive, watch } from 'vue';
 
 const props = defineProps(['policy', 'index']);
 const emits = defineEmits(['swipe', 'openModal']);
+
+const state = reactive({
+  m:props.policy.metadata,
+  aiSafetyScore: props.policy.AI_safety_score,
+  deductible: props.policy.metadata.deductible,
+  price: props.policy.metadata.price,
+  title: props.policy.section_title,
+
+});
+
+
+// Watch for changes in props.policy and update state reactively
+watch(
+  () => props.policy,
+  (newPolicy) => {
+    state.m = newPolicy.metadata;
+    state.aiSafetyScore = newPolicy.metadata?.AI_safety_score || '';
+    state.deductible = newPolicy.metadata?.deductible || '';
+    state.price = newPolicy.metadata?.price || '';
+    state.title = newPolicy.section_title || '';
+  },
+  { immediate: true }
+);
 
 
 function swipe(direction) {
@@ -87,6 +106,21 @@ function removePolicyOption() {
 }
 
 
+function mapTitleToImgUrl(title) {
+  // Convert title to lowercase and trim any extra spaces
+  const normalizedTitle = title.trim().toLowerCase();
+
+  // Check for keywords and map accordingly
+  if (normalizedTitle.includes("total") || normalizedTitle.includes("umbrella")) {
+    return "umbrella";
+  } else if (normalizedTitle.includes("economic") || normalizedTitle.includes("cheap")) {
+    return "cheap";
+  } else if (normalizedTitle.includes("balanced") || normalizedTitle.includes("balance")) {
+    return "balance";
+  } else {
+    return "unknown"; // Fallback if no match is found
+  }
+}
 </script>
 
 <style scoped>
@@ -209,7 +243,7 @@ img {
 
 .policy-row {
   display: flex;
-  flex:3;
+  flex: 3;
   align-items: center;
   justify-content: center;
   color: white;
@@ -218,6 +252,7 @@ img {
   width: 100%;
   text-align: center;
 }
+
 .policy-text {
   color: white;
   margin: 0.5rem;
