@@ -165,7 +165,7 @@ export default {
 
 label {
   font-size: 1.3rem;
-  color: #5743D3;; /* Matching color with the submit button */
+  color: #5743D3; /* Matching color with the submit button */
   font-weight: bold;
   display: block;
   margin-bottom: 0.25rem;
@@ -177,7 +177,7 @@ label {
   min-width: 60%;
   margin: 30px 20px;
   padding: 30px;
-  background-color: #eae0e0;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
   text-align: center;

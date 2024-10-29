@@ -1,18 +1,16 @@
 <template>
 
-<AggressiveGraph/>
+<AggressiveGraph  :speed-data="state.speedData" :a="state.aggressivenessData"
+v-if="state.speedData && state.aggressivenessData"/>
+<LoadingWheel class="wheel" :messages="true" v-else/>
 
-<div class="meta-data">
-  {{ props.client.name }}
-  {{ state.speedData }}
-  {{ state.aggressivenessData }}
-</div>
 
 </template>
 <script setup>
 import { reactive, onMounted } from 'vue';
-
+import { cleanSpeed, cleanAggressive } from '@/utils/clean';
 import AggressiveGraph from '@/components/AggressiveGraph.vue';
+import LoadingWheel from './LoadingWheel.vue';
 import SpeedGraph from '@/components/SpeedGraph.vue';
 
 
@@ -22,10 +20,8 @@ const state = reactive({
 });
 
 
-const props = defineProps(['client', 'speed', 'aggressive']);
-console.log(props.client);
-console.log(props.speed);
-console.log(props.data);
+const props = defineProps(['client']);
+
 
 async function getData(urlSuffix) {
   let retValue = null;
@@ -47,24 +43,45 @@ async function getData(urlSuffix) {
 
 
 onMounted(async () => {
+  const aggressivenessRetObj = await getData('aggressive');
+  state.aggressivenessData = cleanAggressive(aggressivenessRetObj);
   debugger
-  alert('egg')
   const s = state;
-  // state.aggressivenessData = await getData('aggressive');
-  debugger
-  state.speedData = await getData('speed');
+  console.log(state.aggressivenessData)
+  console.log(aggressivenessRetObj)
+  const speedRetObj = await getData('speed');
+
+  state.speedData = cleanSpeed(speedRetObj);
   const speedUrl = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/speed'
   fetch('https://example.com/api/endpoint')
   .then(response => response.json()) // Convert the response to JSON if it’s in JSON format
   .then(data => {
     state.speedData = data; // Set the data to the state
-    console.log(data)
+
   }) // Handle the data from the response
   .catch(error => console.error('Error:', error)); // Handle any errors
-  const x = 5;
+
 });
 </script>
 <style>
+.wheel-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.wheel {
+  margin-top: 15rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
 .container {
   display: flex;
   flex-direction: column;
