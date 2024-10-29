@@ -7,8 +7,9 @@
       </div>
       <h1 class="title">Policy Royale</h1>
       <h2 class="subtitle">Welcome back</h2>
-      <!-- 动态显示 description -->
-      <p class="description" @click="increasePage()">{{ currentDescription }}</p>
+      <p class="description">
+        Your AI-Powered Underwriting Agent
+      </p>
 
       <!-- Pagination dots -->
       <div class="pagination-dots" @click="increasePage()">

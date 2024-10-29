@@ -13,18 +13,16 @@
 
     <!-- Circular Indicator Section -->
     <div class="indicator-container">
-      <div class="indicator-section" v-for="(value, index) in indicatorValues" :key="index">
+      <div class="indicator-section" v-for="(indicator, index) in indicators" :key="index">
         <div class="circular-indicator">
-          <Doughnut :data="getIndicatorData(value)" :options="indicatorOptions" />
-          <div class="indicator-center-text">{{ value }}</div>
+          <Doughnut :data="getIndicatorData(indicator.value)" :options="indicatorOptions" />
+          <div class="indicator-center-text">{{ indicator.value }}</div>
         </div>
         <div class="indicator-text">
-          <h4 class="indicator-title">Reducing Pressure Sores</h4>
-          <p class="indicator-description">
-            Reduce the proportion of patients with pressure sores by 50% in 12 months
-          </p>
-          <p class="indicator-source">Bayhealth General</p>
-          <p class="indicator-leader">Led by Kevin McDiarmid and Bayhealth General Hospital</p>
+          <h4 class="indicator-title">{{ indicator.title }}</h4>
+          <p class="indicator-description">{{ indicator.description }}</p>
+          <p class="indicator-source">{{ indicator.source }}</p>
+          <p class="indicator-leader">{{ indicator.leader }}</p>
         </div>
       </div>
     </div>
@@ -36,7 +34,7 @@
 
     <!-- Line Chart 2 -->
     <div class="line-chart-wrapper">
-      <Line id="my-line-chart" :options="lineChartOptions" :data="lineChartData" />
+      <Line id="my-line-chart2" :options="lineChartOptions2" :data="lineChartData2" />
     </div>
   </div>
 </template>
@@ -82,12 +80,16 @@ export default {
   data() {
     return {
       // Set the initial percentage value for the main doughnut chart
-      percentage: 25,
+      percentage: Math.floor(Math.random() * 98) + 1,
+      // percentage: Math.min(this.data.speeds[0],this.data.speeds[1]) / Math.max(this.data.speeds[0],this.data.speeds[1]) * 100,
       // DATA FOR SPEED
-      speedVector: this.speedData.speed,
-      balanceVector: this.speedData.balance,
+      speedVector: this.speedData.speeds,
+      // speedVector: [20, 40, 60, 80, 100],
+      balanceVector: this.speedData.balanced,
+      // balanceVector: [50, 420, 42, 300, 250],
       economicVector: this.speedData.economic,
-      totalVector: this.speedData.total,
+      // TODO there's nothing in total coverage
+      totalVector: this.speedData.totalCoverage,
       // DATA FOR AGGRESSIVE
       /**
        * This represents the price paid relatice to how aggressive they are (ratio,
@@ -101,22 +103,45 @@ export default {
       // Values for each indicator (as percentages)
       indicatorValues: [30, 50, 70], // Each value represents a unique percentage for each indicator
 
-      // Data and options for the line chart
+      // data and options for line chart 1 
       lineChartData: {
-        labels: ['January', 'February', 'March'],
+        labels: this.speedData.speeds,
         datasets: [
           {
-            label: 'Monthly Sales',
-            data: [40, 20, 12],
-            borderColor: '#5743D3',
-            backgroundColor: 'rgba(87, 67, 211, 0.2)',
+            label: 'Balanced',          // First line label
+            data: this.speedData.balanced,    // First line data
+            borderColor: '#5743D3',           // Color of the first line
+            backgroundColor: '#5743D3', 
             borderWidth: 2,
             pointBackgroundColor: '#5743D3',
             pointBorderColor: '#5743D3',
             tension: 0.4,
           },
+          {
+            label: 'Economic Data',           // Second line label
+            data: this.speedData.economic,    // Second line data
+            borderColor: '#d3549e',           // Color of the second line
+            backgroundColor: '#d3549e', 
+            borderWidth: 2,
+            pointBackgroundColor: '#d3549e',
+            pointBorderColor: '#d3549e',
+            tension: 0.4,
+          }
+          ,
+          {
+            label: 'Total Coverage',          // Third line label
+            data: this.speedData.total, // Third line data
+            borderColor: '#A378FC',           // Color of the third line
+            backgroundColor: '#A378FC', 
+            borderWidth: 2,
+            pointBackgroundColor: '#A378FC',
+            pointBorderColor: '#A378FC',
+            tension: 0.4,
+          }
         ],
       },
+
+
       lineChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -127,10 +152,68 @@ export default {
         },
         scales: {
           y: {
-            beginAtZero: true,
+            beginAtZero: false,
+            min: Math.min(this.speedData.speeds),
+            max: Math.max(this.speedData.totalCoverage),
           },
         },
       },
+
+      // Data and options for line chart 2
+      lineChartData2: {
+        labels: this.a.ratios,
+        datasets: [
+          {
+            label: 'Balanced',          // First line label
+            data: this.a.balanced,    // First line data
+            borderColor: '#5743D3',           // Color of the first line
+            backgroundColor: '#5743D3', 
+            borderWidth: 2,
+            pointBackgroundColor: '#5743D3',
+            pointBorderColor: '#5743D3',
+            tension: 0.4,
+          },
+          {
+            label: 'Economic Data',           // Second line label
+            data: this.a.economic,    // Second line data
+            borderColor: '#d3549e',           // Color of the second line
+            backgroundColor: '#d3549e', 
+            borderWidth: 2,
+            pointBackgroundColor: '#d3549e',
+            pointBorderColor: '#d3549e',
+            tension: 0.4,
+          }
+          ,
+          {
+            label: 'Total Coverage',          // Third line label
+            data: this.a.totalCoverage, // Third line data
+            borderColor: '#A378FC',           // Color of the third line
+            backgroundColor: '#A378FC', 
+            borderWidth: 2,
+            pointBackgroundColor: '#A378FC',
+            pointBorderColor: '#A378FC',
+            tension: 0.4,
+          }
+        ],
+      },
+
+      lineChartOptions2: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: Math.min(this.a.balanced),
+            max: Math.max(this.a.totalCoverage),
+          },
+        },
+      },
+
       doughnutChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -146,6 +229,26 @@ export default {
           },
         },
       },
+      // INDICATOR STUFF
+      indicators: [
+        {
+          value: Math.floor(Math.random() * 70) + 1,
+          title: 'Autonomy Score',
+          description: 'Measure of how often driver initiates autonomy',
+        },
+        {
+          value: Math.floor(Math.random() * 98) + 1,
+          title: 'Efficiency Score',
+          description: 'Shows driver efficiency in various conditions',
+        },
+        {
+          value: Math.floor(Math.random() * 98) + 1,
+          title: 'Risk Assessment',
+          description: 'Risk level based on recent driving data',
+        },
+      ],
+
+      // Options for the circular indicators
       indicatorOptions: {
         responsive: true,
         maintainAspectRatio: false,
@@ -153,12 +256,8 @@ export default {
         rotation: -90,
         circumference: 360,
         plugins: {
-          tooltip: {
-            enabled: false,
-          },
-          legend: {
-            display: false,
-          },
+          tooltip: { enabled: false },
+          legend: { display: false },
         },
       },
     };
@@ -215,6 +314,7 @@ export default {
   width: 100%;
   max-width: 800px;
   aspect-ratio: 2 / 1;
+  margin: 2.5rem;
 }
 
 .chart-container {
@@ -270,20 +370,19 @@ export default {
 /* New Styles for Circular Indicator Section */
 .indicator-container {
   margin-bottom: 60px;
-
 }
 
 .indicator-section {
   display: flex;
-  align-items: center;
-  margin-top: 30px;
+  align-items: center; /* Aligns items vertically in the center */
+  margin-top: 20px;
 }
 
 .circular-indicator {
   position: relative;
   width: 60px;
   height: 60px;
-  margin-right: 15px;
+  margin-right: 15px; /* Space between the circle and text */
 }
 
 .indicator-center-text {
@@ -298,6 +397,7 @@ export default {
 
 .indicator-text {
   color: #5743D3;
+  max-width: 250px; /* Optional: limit text width */
 }
 
 .indicator-title {
@@ -312,7 +412,6 @@ export default {
   margin: 0;
 }
 
-.indicator-source,
 .indicator-leader {
   font-size: 12px;
   color: #9a9a9a;
