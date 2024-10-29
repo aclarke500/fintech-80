@@ -4,6 +4,7 @@
         <h2 class="chart-title">Safety Score</h2>
         <p class="chart-subtitle">Insights tailored to generate more efficient pricing based off driving data</p>
       </div>
+      
       <!-- Doughnut chart -->
       <div class="doughnut-wrapper">
         <Doughnut
@@ -11,14 +12,19 @@
           :options="doughnutChartOptions"
           :data="doughnutChartData"
         />
-        <div class="doughnut-center-text">{{ doughnutChartData.datasets[0].data[0] }}</div>
+        <div class="doughnut-center-text">{{ doughnutChartData.datasets[0].data[0] }}%</div>
       </div>
+  
       <!-- Circular Indicator Section -->
       <div class="indicator-container">
-        <div class="indicator-section" v-for="(indicator, index) in 3" :key="index">
+        <div
+          class="indicator-section"
+          v-for="(value, index) in indicatorValues"
+          :key="index"
+        >
           <div class="circular-indicator">
-            <Doughnut :data="indicatorData" :options="indicatorOptions" />
-            <div class="indicator-center-text">4.0</div>
+            <Doughnut :data="getIndicatorData(value)" :options="indicatorOptions" />
+            <div class="indicator-center-text">{{ value }}</div>
           </div>
           <div class="indicator-text">
             <h4 class="indicator-title">Reducing Pressure Sores</h4>
@@ -30,148 +36,152 @@
           </div>
         </div>
       </div>
+  
       <!-- Line Chart 1 -->
       <div class="line-chart-wrapper">
-        <Line
-          id="my-line-chart"
-          :options="lineChartOptions"
-          :data="lineChartData"
-        />
+        <Line id="my-line-chart" :options="lineChartOptions" :data="lineChartData" />
       </div>
+      
       <!-- Line Chart 2 -->
       <div class="line-chart-wrapper">
-        <Line
-          id="my-line-chart"
-          :options="lineChartOptions"
-          :data="lineChartData"
-        />
+        <Line id="my-line-chart" :options="lineChartOptions" :data="lineChartData" />
       </div>
     </div>
   </template>
   
   
+  
   <script>
-import { Line, Doughnut } from 'vue-chartjs';
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  PointElement,
-  ArcElement,
-  CategoryScale,
-  LinearScale,
-} from 'chart.js';
-
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  LineElement,
-  PointElement,
-  ArcElement,
-  CategoryScale,
-  LinearScale
-);
-
-export default {
-  name: 'LineAndDoughnutChart',
-  components: { Line, Doughnut },
-  data() {
-    return {
-      // Set the initial percentage value
-      percentage: 25, // Change this value to update the progress
-      // Data and options for the line chart
-      lineChartData: {
-        labels: ['January', 'February', 'March'],
-        datasets: [
-          {
-            label: 'Monthly Sales',
-            data: [40, 20, 12],
-            borderColor: '#5743D3', // Purple line color
-            backgroundColor: 'rgba(87, 67, 211, 0.2)', // Light purple fill
-            borderWidth: 2,
-            pointBackgroundColor: '#5743D3',
-            pointBorderColor: '#5743D3',
-            tension: 0.4 // Smooths out the line
-          },
-        ],
-      },
-      lineChartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: true,
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
-      },
-      doughnutChartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '80%',
-        rotation: -90,
-        circumference: 180,
-        plugins: {
-          tooltip: {
-            enabled: false,
-          },
-          legend: {
-            display: false,
-          },
-        },
-      },
-      // Data and options for the circular indicators (remains unchanged)
-      indicatorData: {
-        labels: ['Progress', 'Remaining'],
-        datasets: [
-          {
-            data: [4, 6],
-            backgroundColor: ['#5743D3', '#e5e7eb'],
-            borderWidth: 0,
-          },
-        ],
-      },
-      indicatorOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '80%',
-        rotation: -90,
-        circumference: 360,
-        plugins: {
-          tooltip: {
-            enabled: false,
-          },
-          legend: {
-            display: false,
-          },
-        },
-      },
-    };
-  },
-  computed: {
-    // Compute the doughnut chart data based on the percentage value
-    doughnutChartData() {
+  import { Line, Doughnut } from 'vue-chartjs';
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    LineElement,
+    PointElement,
+    ArcElement,
+    CategoryScale,
+    LinearScale,
+  } from 'chart.js';
+  
+  ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    LineElement,
+    PointElement,
+    ArcElement,
+    CategoryScale,
+    LinearScale
+  );
+  
+  export default {
+    name: 'LineAndDoughnutChart',
+    components: { Line, Doughnut },
+    data() {
       return {
-        labels: ['Score', 'Remaining'],
-        datasets: [
-          {
-            data: [this.percentage, 100 - this.percentage],
-            backgroundColor: ['#5743D3', '#e5e7eb'], // Purple for progress, gray for remaining
-            borderWidth: 0,
+        // Set the initial percentage value for the main doughnut chart
+        percentage: 25,
+  
+        // Values for each indicator (as percentages)
+        indicatorValues: [30, 50, 70], // Each value represents a unique percentage for each indicator
+  
+        // Data and options for the line chart
+        lineChartData: {
+          labels: ['January', 'February', 'March'],
+          datasets: [
+            {
+              label: 'Monthly Sales',
+              data: [40, 20, 12],
+              borderColor: '#5743D3',
+              backgroundColor: 'rgba(87, 67, 211, 0.2)',
+              borderWidth: 2,
+              pointBackgroundColor: '#5743D3',
+              pointBorderColor: '#5743D3',
+              tension: 0.4,
+            },
+          ],
+        },
+        lineChartOptions: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+            },
           },
-        ],
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+        doughnutChartOptions: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '80%',
+          rotation: -90,
+          circumference: 180,
+          plugins: {
+            tooltip: {
+              enabled: false,
+            },
+            legend: {
+              display: false,
+            },
+          },
+        },
+        indicatorOptions: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '80%',
+          rotation: -90,
+          circumference: 360,
+          plugins: {
+            tooltip: {
+              enabled: false,
+            },
+            legend: {
+              display: false,
+            },
+          },
+        },
       };
-    }
-  }
-};
-</script>
+    },
+    computed: {
+      // Compute the doughnut chart data for the main chart
+      doughnutChartData() {
+        return {
+          labels: ['Score', 'Remaining'],
+          datasets: [
+            {
+              data: [this.percentage, 100 - this.percentage],
+              backgroundColor: ['#5743D3', '#e5e7eb'],
+              borderWidth: 0,
+            },
+          ],
+        };
+      },
+    },
+    methods: {
+      // Generate data for each circular indicator based on its value
+      getIndicatorData(value) {
+        return {
+          labels: ['Progress', 'Remaining'],
+          datasets: [
+            {
+              data: [value, 100 - value],
+              backgroundColor: ['#5743D3', '#e5e7eb'],
+              borderWidth: 0,
+            },
+          ],
+        };
+      },
+    },
+  };
+  </script>
+  
 
   
   <style scoped>
