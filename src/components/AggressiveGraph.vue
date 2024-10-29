@@ -162,11 +162,11 @@ export default {
 
       // Data and options for line chart 2
       lineChartData2: {
-        labels: this.speedData.speeds,
+        labels: this.a.ratios,
         datasets: [
           {
             label: 'Monthly Sales',          // First line label
-            data: this.speedData.balanced,    // First line data
+            data: this.a.balanced,    // First line data
             borderColor: '#5743D3',           // Color of the first line
             backgroundColor: 'rgba(87, 67, 211, 0.2)', 
             borderWidth: 2,
@@ -176,7 +176,7 @@ export default {
           },
           {
             label: 'Economic Data',           // Second line label
-            data: this.speedData.economic,    // Second line data
+            data: this.a.economic,    // Second line data
             borderColor: '#43D38D',           // Color of the second line
             backgroundColor: 'rgba(67, 211, 141, 0.2)', 
             borderWidth: 2,
@@ -187,7 +187,7 @@ export default {
           ,
           {
             label: 'Total Coverage',          // Third line label
-            data: this.speedData.total, // Third line data
+            data: this.a.totalCoverage, // Third line data
             borderColor: '#D34343',           // Color of the third line
             backgroundColor: 'rgba(211, 67, 67, 0.2)', 
             borderWidth: 2,
@@ -209,8 +209,8 @@ export default {
         scales: {
           y: {
             beginAtZero: false,
-            min: Math.min(this.speedData.speeds),
-            max: Math.max(this.speedData.totalCoverage),
+            min: Math.min(this.a.balanced),
+            max: Math.max(this.a.totalCoverage),
           },
         },
       },
@@ -299,6 +299,7 @@ export default {
   width: 100%;
   max-width: 800px;
   aspect-ratio: 2 / 1;
+  margin: 2.5rem;
 }
 
 .chart-container {
