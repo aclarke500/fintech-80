@@ -94,7 +94,6 @@ function openPolicyModal() {
 onMounted(async () => {
   // mock data
   if (!store.formClient) {
-    alert('no form data')
     state.policies = [ {
     metadata: {
       AI_safety_score: 85,
