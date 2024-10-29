@@ -1,63 +1,51 @@
 <template>
   <div class="parent-container">
-
-
     <div class="meta-data-container">
-      <button class="swipe" @click="swipe('left')">
-        < </button>
-          <!-- display of the policy high level data -->
-          <div class="meta-data">
-            <div class="policy-row">
-              <!-- +1 to account for 0 based indexing -->
-              <h1>The {{ state.title }}</h1>
-            </div>
+      <!-- Left arrow button -->
+      <button class="swipe left" @click="swipe('left')">&lt;</button>
+      
+      <!-- Policy high-level data -->
+      <div class="meta-data">
+        <div class="policy-row">
+          <h1>The {{ state.title }}</h1>
+        </div>
 
-            <div class="photos-container">
-              <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus"
-                @click="openPolicyModal" />
-              <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus"
-                @click="openPolicyModal" />
-              <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus"
-                @click="openPolicyModal" />
-            </div>
+        <div class="photos-container">
+          <img v-if="mapTitleToImgUrl(state.title) == 'umbrella'" src="../assets/umbrella.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="mapTitleToImgUrl(state.title) == 'cheap'" src="../assets/cheap.png" alt="plus" @click="openPolicyModal" />
+          <img v-if="mapTitleToImgUrl(state.title) == 'balance'" src="../assets/balance.png" alt="plus" @click="openPolicyModal" />
+        </div>
 
+        <!-- Labeled Policy Details -->
+        <div class="policy-row">
+          <div class="label">Price:</div>
+          <div class="policy-text">{{ state.price }}</div>
+        </div>
+        <div class="policy-row">
+          <div class="label">Deductible:</div>
+          <div class="policy-text">{{ state.deductible }}</div>
+        </div>
+        <div class="policy-row">
+          <div class="label">AI Safety Score:</div>
+          <div class="policy-text">{{ state.aiSafetyScore }}</div>
+        </div>
 
-            <div class="policy-row">
-              <div class="policy-text"> {{ state.price }}</div>
-            </div>
+        <!-- Button Container now inside Meta Data Container -->
+        <div class="button-container">
+          <button @click="openPolicyModal"><i class="fa-regular fa-file-lines"></i></button>
+          <button @click="removePolicyOption"><i class="fa-light fa-x"></i></button>
+          <button><i id="heart" class="fa-solid fa-heart"></i></button>
+          <button><i class="fa-sharp fa-light fa-ellipsis"></i></button>
+        </div>
+      </div>
 
-            <div class="policy-row">
-              <div class="policy-text">{{ state.deductible}}</div>
-            </div>
-
-            <div class="policy-row">
-              <div class="policy-text">Model: {{ state.aiSafetyScore }}</div>
-            </div>
-
-
-          </div>
-          <button class="swipe" @click="swipe('right')">></button>
-
+      <!-- Right arrow button -->
+      <button class="swipe right" @click="swipe('right')">&gt;</button>
     </div>
-
-
-    <div class="button-container sticky-bottom">
-      <button @click="openPolicyModal">
-        <i class="fa-regular fa-file-lines"></i>
-      </button>
-      <button @click="removePolicyOption">
-        <i class="fa-light fa-x"></i>
-      </button>
-      <button>
-        <i id="heart" class="fa-solid fa-heart"></i>
-      </button>
-      <button>
-        <i class="fa-sharp fa-light fa-ellipsis"></i>
-      </button>
-    </div>
-
   </div>
 </template>
+
+
 
 <script setup>
 import { reactive, watch } from 'vue';
@@ -130,161 +118,94 @@ function mapTitleToImgUrl(title) {
   color: red;
 }
 
-
-img {
-  width: 150%;
-  max-width: 500px;
-  max-height: 200px;
-  height: auto;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  /* height: 30%; */
-}
-
-#policy-icon {
-  color: white;
-  height: 100px;
-}
-
-.tinder-button {
-  color: black;
-  height: 100px;
-}
-
-.button-container {
+.photos-container {
   display: flex;
-  justify-content: space-evenly;
-  /* Evenly distributes buttons across the container */
+  justify-content: center;
   align-items: center;
-  background-color: rgb(27 42 59);
-  padding: 1rem;
-  border-radius: 1rem;
+  gap: 1rem;
   width: 100%;
-  height: 10%;
-  /* Adjusts to content size */
-  border-top: 3px solid black;
+  margin: 1rem 0;
 }
 
-.button-container button {
-  flex: 1;
-  /* Allows each button to grow equally */
-  max-width: 3rem;
-  /* Sets max width for square shape */
-  aspect-ratio: 1 / 1;
-  /* Keeps buttons square */
-  background-color: white;
-  border: black 1px solid;
-  color: black;
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 0;
-  cursor: pointer;
+.photos-container img {
+  width: 20rem;  /* Fixed width for all images */
+  height: 20rem; /* Fixed height for all images */
+  object-fit: cover; /* Ensures images cover the given area without distortion */
+  border-radius: 8px; /* Optional rounding for consistent styling */
 }
-
-.button-container button:hover {
-  background-color: #e0e0e0;
-  /* Slightly darker background */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  /* Adds shadow */
-}
-
-
-.sticky-bottom {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  /* Optional: make it full width */
-  padding: 1rem;
-  /* Optional: padding for space */
-  text-align: center;
-  /* Optional: center-align content */
-}
-
 
 .meta-data-container {
   display: flex;
-  flex-direction: row;
-  /* Change to row to align items horizontally */
+  align-items: center;
   justify-content: center;
-  align-items: top;
-  margin: 1rem;
+  position: relative;
+  flex-direction: column;
+  width: 95%;
+  max-width: 1100px;
+  margin: 1rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(12, 12, 12, 0.1);
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .meta-data {
   display: flex;
   flex-direction: column;
-  flex: 5;
-}
-
-.meta-data-container button {
-  flex: 1/4;
-  /* Adjusts button to occupy space on either side */
-  background-color: rgba(255, 0, 0, 0);
-  border: none;
-  color: white;
-  padding: 15px 32px;
+  align-items: center;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 12px;
-  height: 1rem;
-}
-
-/* .meta-data-container button{
-
-} */
-
-
-
-.meta-data-container button:active {
-  background-color: #1f4317;
+  width: 100%;
 }
 
 .policy-row {
   display: flex;
-  flex: 3;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #7357D9;
   word-wrap: break-word;
-  /* max-width: 80%; */
   width: 100%;
   text-align: center;
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: #333;
 }
 
 .policy-text {
-  color: white;
-  margin: 0.5rem;
+  color: #7357D9;
 }
 
-
-.photos-container {
+.button-container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  margin: 1rem;
-  height: 30%;
-  max-height: 30%;
+  padding: 1.5rem;
+  width: 100%;
 }
 
-.parent-container font-awesome-icon {
-  color: white;
-  height: 100px;
+.button-container button {
+  flex: 1;
+  max-width: 4rem;
+  width: 4rem;
+  height: 4rem;
+  background-color: white;
+  color: black;
+  font-size: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.policy-row h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  /* color: white; */
-  margin: 0.5rem;
+.button-container button:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .parent-container {
@@ -292,5 +213,72 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+/* Arrow buttons styling */
+.swipe {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7357D9;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.swipe.left {
+  left: 1rem;
+}
+
+.swipe.right {
+  right: 1rem;
+}
+
+.swipe:hover {
+  color: #5743D3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .meta-data-container {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .policy-row {
+    font-size: 1.2rem;
+  }
+
+  .button-container {
+    padding: 1rem;
+  }
+
+  .button-container button {
+    max-width: 3rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meta-data-container {
+    padding: 0.5rem;
+  }
+
+  .policy-row {
+    font-size: 1rem;
+    flex-direction: column;
+  }
+
+  .button-container button {
+    max-width: 2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
 }
 </style>
