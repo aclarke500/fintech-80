@@ -8,7 +8,7 @@
         <div class="name">{{ client.name }}</div>
         <div class="car">{{ client.car }}</div>
         <div class="plate">{{ client.plate }}</div>
-        <div class="plan">{{ client.car }}</div>
+        <div class="plan">{{ client.plan }}</div>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@ const state = reactive({
     },
     {
       name: 'Bob Williams',
-      car: 'Chevrolet',
+      car: 'BYD',
       plate: 'DEF321',
       plan: 'Balanced',
     },
@@ -65,19 +65,20 @@ function clickedPill(client){
 
 <style scoped>
 .holder {
-width: 80%;
+width: 98%;
 }
 
 .container {
+  font-size: 1.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   background-color: white;
-  height: 30rem;
+  height: 100%;
   min-width: 10rem;
-  width: 70%;
+  width: 100%;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   /* Optional shadow for style */
@@ -87,6 +88,8 @@ width: 80%;
 
 
 .client-pill{
+  color: #5743D3;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: center;
