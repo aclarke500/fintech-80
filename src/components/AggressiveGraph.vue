@@ -108,17 +108,28 @@ export default {
         labels: this.speedData.speeds,
         datasets: [
           {
-            label: 'Monthly Sales',
-            data: this.speedData.balanced,
-            borderColor: '#5743D3',
-            backgroundColor: 'rgba(87, 67, 211, 0.2)',
+            label: 'Monthly Sales',          // First line label
+            data: this.speedData.balanced,    // First line data
+            borderColor: '#5743D3',           // Color of the first line
+            backgroundColor: 'rgba(87, 67, 211, 0.2)', 
             borderWidth: 2,
             pointBackgroundColor: '#5743D3',
             pointBorderColor: '#5743D3',
             tension: 0.4,
           },
+          {
+            label: 'Economic Data',           // Second line label
+            data: this.speedData.economic,    // Second line data
+            borderColor: '#43D38D',           // Color of the second line
+            backgroundColor: 'rgba(67, 211, 141, 0.2)', 
+            borderWidth: 2,
+            pointBackgroundColor: '#43D38D',
+            pointBorderColor: '#43D38D',
+            tension: 0.4,
+          }
         ],
       },
+
       lineChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
