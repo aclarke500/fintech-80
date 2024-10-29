@@ -51,7 +51,7 @@
   
   
   <script>
-  import { Line, Doughnut } from 'vue-chartjs';
+import { Line, Doughnut } from 'vue-chartjs';
 import {
   Chart as ChartJS,
   Title,
@@ -80,6 +80,8 @@ export default {
   components: { Line, Doughnut },
   data() {
     return {
+      // Set the initial percentage value
+      percentage: 25, // Change this value to update the progress
       // Data and options for the line chart
       lineChartData: {
         labels: ['January', 'February', 'March'],
@@ -109,17 +111,6 @@ export default {
             beginAtZero: true,
           },
         },
-      },
-      // Data and options for the doughnut chart (remains unchanged)
-      doughnutChartData: {
-        labels: ['Score', 'Remaining'],
-        datasets: [
-          {
-            data: [90, 8],
-            backgroundColor: ['#5743D3', '#e5e7eb'],
-            borderWidth: 0,
-          },
-        ],
       },
       doughnutChartOptions: {
         responsive: true,
@@ -164,9 +155,24 @@ export default {
       },
     };
   },
+  computed: {
+    // Compute the doughnut chart data based on the percentage value
+    doughnutChartData() {
+      return {
+        labels: ['Score', 'Remaining'],
+        datasets: [
+          {
+            data: [this.percentage, 100 - this.percentage],
+            backgroundColor: ['#5743D3', '#e5e7eb'], // Purple for progress, gray for remaining
+            borderWidth: 0,
+          },
+        ],
+      };
+    }
+  }
 };
+</script>
 
-  </script>
   
   <style scoped>
   .line-chart-wrapper {
