@@ -376,20 +376,19 @@ export default {
 /* New Styles for Circular Indicator Section */
 .indicator-container {
   margin-bottom: 60px;
-
 }
 
 .indicator-section {
   display: flex;
-  align-items: center;
-  margin-top: 30px;
+  align-items: center; /* Aligns items vertically in the center */
+  margin-top: 20px;
 }
 
 .circular-indicator {
   position: relative;
   width: 60px;
   height: 60px;
-  margin-right: 15px;
+  margin-right: 15px; /* Space between the circle and text */
 }
 
 .indicator-center-text {
@@ -404,6 +403,7 @@ export default {
 
 .indicator-text {
   color: #5743D3;
+  max-width: 250px; /* Optional: limit text width */
 }
 
 .indicator-title {
@@ -418,7 +418,6 @@ export default {
   margin: 0;
 }
 
-.indicator-source,
 .indicator-leader {
   font-size: 12px;
   color: #9a9a9a;
