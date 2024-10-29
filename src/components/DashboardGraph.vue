@@ -39,7 +39,6 @@ console.log(props.data);
   max-width: 100%;
   height: auto;
   min-height: 12.5rem; /* Equivalent to 200px */
-  margin: 1rem 0; /* Adds vertical spacing between graphs */
 }
 
 /* Responsive adjustments for tablets */
