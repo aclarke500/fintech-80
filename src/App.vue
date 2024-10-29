@@ -22,6 +22,7 @@
 
 /* Navbar styling */
 .nav-items {
+  font-size: 1.2rem;
   display: flex;
   align-items: center; /* Center items vertically */
 }

@@ -14,14 +14,14 @@
       <div class="form-group">
         <label>Select Car Model</label>
         <div class="carousel-container">
-          <button @click="prevItem" class="carousel-control">‹</button>
+          <!-- <button @click="prevItem" class="carousel-control">‹</button> -->
           
           <!-- Display the current car model image -->
           <div class="carousel-item">
             <img :src="carModels[currentIndex].image" :alt="carModels[currentIndex].name" />
           </div>
           
-          <button @click="nextItem" class="carousel-control">›</button>
+          <!-- <button @click="nextItem" class="carousel-control">›</button> -->
         </div>
 
         <!-- Car model name below the carousel -->

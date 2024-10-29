@@ -1,22 +1,31 @@
 <template>
-<div class="container">
+
+<AggressiveGraph/>
+
 <div class="meta-data">
   {{ props.client.name }}
   {{ state.speedData }}
   {{ state.aggressivenessData }}
 </div>
 
-</div>
 </template>
 <script setup>
 import { reactive, onMounted } from 'vue';
 
-const props = defineProps(['client']);
+import AggressiveGraph from '@/components/AggressiveGraph.vue';
+import SpeedGraph from '@/components/SpeedGraph.vue';
+
+
 const state = reactive({
   speedData: null,
   aggressivenessData: null,
 });
+
+
+const props = defineProps(['client', 'speed', 'aggressive']);
 console.log(props.client);
+console.log(props.speed);
+console.log(props.data);
 
 async function getData(urlSuffix) {
   let retValue = null;
@@ -55,22 +64,51 @@ onMounted(async () => {
   const x = 5;
 });
 </script>
-<style scoped>
-
+<style>
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  background-color: white;
-  height: 30rem;
-  min-width: 10rem;
-  width: 70%;
-  padding: 2rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  /* Optional shadow for style */
-  border-radius: 8px;
-  /* Optional rounded corners */
+  width: 100%;
+  max-width: 50rem; /* Equivalent to 800px */
+  margin: 1.5rem auto; /* Reduced margin for less space around the container */
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-sizing: border-box;
 }
+
+/* Chart container to hold individual graphs */
+.chart-container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 12.5rem; /* Equivalent to 200px */
+}
+
+/* Responsive adjustments for tablets */
+@media (max-width: 48rem) {
+  .container {
+    width: 95%;
+    padding: 1rem;
+    margin: 1rem auto; /* Slightly reduced margin for tablets */
+  }
+
+  .meta-data {
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 30rem) {
+  .container {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.75rem auto; /* Reduced margin for mobile screens */
+  }
+
+  .meta-data {
+    font-size: 0.8rem;
+  }
+}
+
 </style>
