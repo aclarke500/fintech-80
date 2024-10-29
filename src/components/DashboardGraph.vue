@@ -9,8 +9,10 @@
 <script setup>
 import { reactive } from 'vue';
 
-const props = defineProps(['client']);
+const props = defineProps(['client', 'speed', 'aggressive']);
 console.log(props.client);
+console.log(props.speed);
+console.log(props.data);
 
 
 </script>

@@ -4,8 +4,8 @@
   </div>
 
 
-  <div class="container" v-if="state.user">
-    <DashboardGraph :client="state.user" />
+  <div class="container" v-if="state.user && state.showGraphs">
+    <DashboardGraph :client="state.user" :speed="state.speedData" :aggressive="state.aggressivenessData" />
   </div>
   <p>{{ state.speedData }}
     {{ state.aggressivenessData }}</p>
@@ -18,12 +18,12 @@ import DashboardGraph from '@/components/DashboardGraph.vue';
 
 const state = reactive({
   user: null,
-  speedData: 'egg',
-  aggressivenessData: 'egg',
+  speedData: null,
+  aggressivenessData: null,
+  showGraphs:false,
 })
 
 function clickedPill(client) {
-  alert('clicked pill');
   state.user = client;
   console.log(client);
 }
@@ -64,12 +64,13 @@ async function fetchData() {
 }
 
 onMounted(async () => {
-  debugger
-  const s = state;
-  state.aggressivenessData = await getData('aggressive');
-  debugger
-  state.speedData = await getData('speed');
-  const x = 5;
+  // state.aggressivenessData = await getData('aggressive');
+
+  // state.speedData = await getData('speed');
+  state.speedData=[1,2,3,4,5,6,7,8,9,10];
+  state.aggressivenessData=[1,2,3,4,5,6,7,8,9,10];
+  state.showGraphs = true;
+  console.log(state.aggressivenessData. state.speedData);
 });
 
 
