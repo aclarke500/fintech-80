@@ -1,15 +1,14 @@
 <template>
-  <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy"
-  :policyText="state.selectedPolicy.policyText" :index="state.indexOfSelectedPolicy"
-   @close="state.showPolicyModal = false"/>
+  <PolicyModal v-if="state.showPolicyModal" :policy="state.selectedPolicy" :policyText="state.selectedPolicy.policyText"
+    :index="state.indexOfSelectedPolicy" @close="state.showPolicyModal = false" />
 
   <Policy v-if="state.selectedPolicy" :policy="state.selectedPolicy" :index="state.indexOfSelectedPolicy"
-  @swipe="(d)=>swipeCards(d)" @openModal="()=>openPolicyModal()" @remove="(idx)=>removePolicyOption(idx)"/>
+    @swipe="(d) => swipeCards(d)" @openModal="() => openPolicyModal()" @remove="(idx) => removePolicyOption(idx)" />
 </template>
 <script setup>
 import { onMounted, reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
-// import { router } from '@/router';
+import store from '@/store';
 import Policy from '@/components/Policy.vue';
 import PolicyModal from '@/components/PolicyModal.vue';
 
@@ -19,24 +18,24 @@ const state = reactive({
   showPolicyModal: false,
   selectedPolicy: null,
   // auto update the index when selected policy changes
-  indexOfSelectedPolicy: computed(() => state.policies.indexOf(state.selectedPolicy)), 
+  indexOfSelectedPolicy: computed(() => state.policies.indexOf(state.selectedPolicy)),
   policies: [
     {
-      policyName:'umbrella',
+      policyName: 'umbrella',
       name: 'John A MacDonald',
       carModel: 'Tesla Model Y',
       aiModel: 'Elon Musk FSD',
       policyText: "This is a sample policy text. It will look better soon. On a chilly autumn morning, Sarah was running late for work..."
     },
     {
-      policyName:'cheap',
+      policyName: 'cheap',
       name: 'Jane Smith',
       carModel: 'Ford Mustang',
       aiModel: 'Ford Co-Pilot360',
       policyText: "This is another sample policy text. Jane loves her Mustang and uses the Co-Pilot360 to make her drives safer. One evening, a deer suddenly appeared on the road, and the AI-assisted braking saved her just in time."
     },
     {
-      policyName:'balance',
+      policyName: 'balance',
       name: 'Alice Johnson',
       carModel: 'BMW X5',
       aiModel: 'BMW Driving Assistant Professional',
@@ -45,7 +44,7 @@ const state = reactive({
   ]
 });
 
-
+console.log(store.formClient)
 
 
 function swipeCards(direction) {
@@ -65,8 +64,8 @@ function swipeCards(direction) {
 }
 
 function removePolicyOption(policyIndex) {
-  if (state.policies.length === 1){
-    router.push({name: 'create-profile'});
+  if (state.policies.length === 1) {
+    router.push({ name: 'create-profile' });
     return;
   }
   // Remove the policy from the array
@@ -84,14 +83,43 @@ function removePolicyOption(policyIndex) {
   }
 }
 
-function openPolicyModal(){
+function openPolicyModal() {
   state.showPolicyModal = true;
 }
 
 
-onMounted(() => {
-  state.selectedPolicy = state.policies[0]
-})
+onMounted(async () => {
+  state.selectedPolicy = state.policies[0];
+
+  // Handle cases where no data is available
+  if (!store.formClient) {
+    return;
+  }
+
+  // JSON stringify for the call
+  const data = JSON.stringify({ 
+    term: JSON.stringify(store.formClient)
+  });
+  console.log(data)
+  const url = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/search';
+
+  // Fetch request with POST method and body
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: data // Move body here
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+});
+
 </script>
 <style scoped>
 p {

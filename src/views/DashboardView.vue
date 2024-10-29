@@ -7,6 +7,9 @@
   <div class="container" v-if="state.user">
     <DashboardGraph :client="state.user" />
   </div>
+  <p>{{ state.speedData }}
+    {{ state.aggressivenessData }}</p>
+
 </template>
 <script setup>
 import { reactive, onMounted } from 'vue';
@@ -15,12 +18,32 @@ import DashboardGraph from '@/components/DashboardGraph.vue';
 
 const state = reactive({
   user: null,
+  speedData: 'egg',
+  aggressivenessData: 'egg',
 })
 
 function clickedPill(client) {
   alert('clicked pill');
   state.user = client;
   console.log(client);
+}
+
+
+async function getData(urlSuffix) {
+  let retValue = null;
+  try {
+    const url = 'https://dataqueens-webapp-gabybrenhcefegak.canadacentral-01.azurewebsites.net/' + urlSuffix;
+    const response = await fetch(url, {
+      method: 'POSt',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    retValue = await response.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+  return retValue;
 }
 
 
@@ -41,13 +64,18 @@ async function fetchData() {
 }
 
 onMounted(async () => {
-  await fetchData();
+  debugger
+  const s = state;
+  state.aggressivenessData = await getData('aggressive');
+  debugger
+  state.speedData = await getData('speed');
+  const x = 5;
 });
 
 
 </script>
 
-<style>
+<style scoped>
 #search {
   display: flex;
   flex-direction: column;
