@@ -36,7 +36,7 @@
 
     <!-- Line Chart 2 -->
     <div class="line-chart-wrapper">
-      <Line id="my-line-chart" :options="lineChartOptions" :data="lineChartData" />
+      <Line id="my-line-chart2" :options="lineChartOptions2" :data="lineChartData2" />
     </div>
   </div>
 </template>
@@ -104,7 +104,7 @@ export default {
       // Values for each indicator (as percentages)
       indicatorValues: [30, 50, 70], // Each value represents a unique percentage for each indicator
 
-      // Data and options for the line chart
+      // data and options for line chart 1 
       lineChartData: {
         labels: this.speedData.speeds,
         datasets: [
@@ -159,6 +159,62 @@ export default {
           },
         },
       },
+
+      // Data and options for line chart 2
+      lineChartData2: {
+        labels: this.speedData.speeds,
+        datasets: [
+          {
+            label: 'Monthly Sales',          // First line label
+            data: this.speedData.balanced,    // First line data
+            borderColor: '#5743D3',           // Color of the first line
+            backgroundColor: 'rgba(87, 67, 211, 0.2)', 
+            borderWidth: 2,
+            pointBackgroundColor: '#5743D3',
+            pointBorderColor: '#5743D3',
+            tension: 0.4,
+          },
+          {
+            label: 'Economic Data',           // Second line label
+            data: this.speedData.economic,    // Second line data
+            borderColor: '#43D38D',           // Color of the second line
+            backgroundColor: 'rgba(67, 211, 141, 0.2)', 
+            borderWidth: 2,
+            pointBackgroundColor: '#43D38D',
+            pointBorderColor: '#43D38D',
+            tension: 0.4,
+          }
+          ,
+          {
+            label: 'Total Coverage',          // Third line label
+            data: this.speedData.total, // Third line data
+            borderColor: '#D34343',           // Color of the third line
+            backgroundColor: 'rgba(211, 67, 67, 0.2)', 
+            borderWidth: 2,
+            pointBackgroundColor: '#D34343',
+            pointBorderColor: '#D34343',
+            tension: 0.4,
+          }
+        ],
+      },
+
+      lineChartOptions2: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true,
+          },
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: Math.min(this.speedData.speeds),
+            max: Math.max(this.speedData.totalCoverage),
+          },
+        },
+      },
+
       doughnutChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
